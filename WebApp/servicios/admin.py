@@ -1,3 +1,19 @@
 from django.contrib import admin
-
+from .models import Cliente
 # Register your models here.
+
+@admin.register(Cliente)
+class ClienteAdmin(admin.ModelAdmin):
+    list_display = ("nombre", "apellido", "activo")
+    list_filter = ("activo",)
+    search_fields = ("nombre", "apellido")
+
+    def delete_model(self, request, obj):
+        ''' Cambia la eliminacion fisica por una eliminacion logica '''
+        obj.activo = False
+        obj.save()
+
+    def delete_queryset(self, request, queryset):
+        ''' Este metodo me permite sobreescribir el comportamiento de
+         la eliminacion multiple que hay en la interfaz Admin '''
+        queryset.update(activo=False)
