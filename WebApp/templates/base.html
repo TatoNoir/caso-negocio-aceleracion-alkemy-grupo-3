@@ -14,6 +14,13 @@
             </a>
 
             <div>
+                <a href="{% url 'listar_servicios' %}"
+                   class="btn btn-outline-light">
+                    Servicios
+                </a>
+            </div>
+
+            <div>
                 <a href="{% url 'lista_clientes' %}"
                    class="btn btn-outline-light">
                     Clientes
@@ -33,6 +40,10 @@
         {% endblock %}
         {% block content_inactive %}
         {% endblock %}
+        {% block servicio_list_activos %}{% endblock %}
+        {% block servicio_crear %}{% endblock %}
+        {% block servicio_detalle %}{% endblock %}
+        {% block servicio_list_inactivos %}{% endblock %}
 
     </main>
 
