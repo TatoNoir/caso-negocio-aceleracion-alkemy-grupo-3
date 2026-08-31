@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block servicio_list_inactivos %}
+
+<div>
+
+    <h1>Servicios Inactivos</h1>
+
+    {% if servicios %}
+        <div class="row g-4">
+            <ul class="list-group m-3">
+                {% for servicio in servicios %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span>
+                        {{ servicio.nombre }}
+                    </span>
+
+                    <div class="d-flex gap-2 flex-shrink-0">
+
+                        <form method="post" action="{% url 'restaurar_servicio' servicio.pk %}">
+                            {% csrf_token %}
+
+                            <button type="submit" class="btn btn-success">
+                                Restaurar
+                            </button>
+                        </form>
+
+                    </div>
+
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% else %}
+        <p>
+            No hay clientes activos.
+        </p>
+    {% endif %}
+
+    <a href="{% url 'listar_servicios' %}" class="btn btn-secondary ms-2">
+        Cancelar
+    </a>
+</div>
+
+{% endblock servicio_list_inactivos %}

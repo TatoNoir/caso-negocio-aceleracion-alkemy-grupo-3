@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
-from .models import Cliente
-from django.views.generic import ListView, CreateView, UpdateView, View
-from .forms import ClienteForm
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Cliente, Servicio
+from django.views.generic import (ListView, CreateView, UpdateView, View,
+                                  DeleteView)
+from .forms import ClienteForm, ServicioForm
 from django.contrib import messages
 from django.urls import reverse_lazy
 
@@ -61,3 +62,51 @@ class ClienteRestoreView(View):
 
         messages.success(request, 'Cliente restaurado correctamente.')
         return redirect('clientes_inactivos')
+
+class ServiciosActivosListView(ListView):
+    model = Servicio
+    context_object_name = "servicios"
+    template_name = "servicio_list_activos.html"
+
+    def get_queryset(self):
+        return Servicio.objects.filter(activo=True)
+
+
+class ServicioCreateView(CreateView):
+    model = Servicio
+    template_name = "servicio_create.html"
+    form_class = ServicioForm
+    success_url = reverse_lazy("listar_servicios")
+
+
+class ServicioDetalleUpdateView(UpdateView):
+    model = Servicio
+    form_class = ServicioForm
+    template_name = "servicio_detalle.html"
+    context_object_name = "servicio"
+    success_url = reverse_lazy("listar_servicios")
+
+
+class ServicioDeleteView(View):
+    def post(self, request, pk):
+        servicio = get_object_or_404(Servicio, pk=pk)
+        servicio.activo = False
+        servicio.save()
+
+        return redirect("listar_servicios")
+
+
+class ServicioInactivosListView(ListView):
+    model = Servicio
+    template_name = "servicio_list_inactivos.html"
+    context_object_name = "servicios"
+
+    def get_queryset(self):
+        return Servicio.objects.filter(activo=False)
+
+
+def restaurar_servicio(request, pk):
+    servicio = get_object_or_404(Servicio, pk=pk)
+    servicio.activo = True
+    servicio.save()
+    return redirect("listar_servicios")
