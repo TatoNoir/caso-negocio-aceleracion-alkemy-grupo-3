@@ -61,7 +61,7 @@ class EmpleadoForm(forms.ModelForm):
 class CoordinadorForm(forms.ModelForm):
     class Meta:
         model = Coordinador
-        fields = ['nombre', 'apellido', 'numero_documento', 'fecha_alta']
+        fields = ['nombre', 'apellido', 'numero_documento']
 
         widgets = {
             'nombre': forms.TextInput(attrs={
@@ -76,8 +76,4 @@ class CoordinadorForm(forms.ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Ingrese el numero de documento'
             }),
-            'fecha_alta': forms.DateInput(attrs={
-                'class': 'form-control',
-                'type': 'date'
-            })
         }
