@@ -43,3 +43,6 @@ media/
 *.log
 .DS_Store
 .vscode/
+
+# Ignorar .idea de PyCharm
+.idea/

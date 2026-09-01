@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CASO DE NEGOCIO</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+
+<nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+
+            <a class="navbar-brand" href="{% url 'lista_clientes' %}">
+                CASO DE NEGOCIO
+            </a>
+
+            <div>
+                <a href="{% url 'listar_servicios' %}"
+                   class="btn btn-outline-light">
+                    Servicios
+                </a>
+            </div>
+
+            <div>
+                <a href="{% url 'lista_clientes' %}"
+                   class="btn btn-outline-light">
+                    Clientes
+                </a>
+            </div>
+
+        </div>
+    </nav>
+
+
+<body>
+    <main class="container mt-4">
+
+        {% block content %}
+        {% endblock %}
+        {% block content_form %}
+        {% endblock %}
+        {% block content_inactive %}
+        {% endblock %}
+        {% block servicio_list_activos %}{% endblock %}
+        {% block servicio_crear %}{% endblock %}
+        {% block servicio_detalle %}{% endblock %}
+        {% block servicio_list_inactivos %}{% endblock %}
+
+    </main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>
