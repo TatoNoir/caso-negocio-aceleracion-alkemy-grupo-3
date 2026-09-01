@@ -25,7 +25,7 @@ class Servicio(models.Model):
 class Empleado(models.Model):
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
-    numero_legajo = models.IntegerField()
+    numero_legajo = models.IntegerField(unique=True)
     activo = BooleanField(default=True)
 
     def __str__(self):
@@ -35,7 +35,7 @@ class Empleado(models.Model):
 class Coordinador(models.Model):
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
-    numero_documento = models.IntegerField()
+    numero_documento = models.IntegerField(unique=True)
     fecha_alta = models.DateField()
     activo = BooleanField(default=True)
 
