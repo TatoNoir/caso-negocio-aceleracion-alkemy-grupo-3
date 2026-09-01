@@ -20,3 +20,24 @@ class Servicio(models.Model):
 
     def __str__(self):
         return f"{self.pk} - {self.nombre}"
+
+
+class Empleado(models.Model):
+    nombre = models.CharField(max_length=100)
+    apellido = models.CharField(max_length=100)
+    numero_legajo = models.IntegerField()
+    activo = BooleanField(default=True)
+
+    def __str__(self):
+        return f"{self.pk} - {self.nombre}"
+
+
+class Coordinador(models.Model):
+    nombre = models.CharField(max_length=100)
+    apellido = models.CharField(max_length=100)
+    numero_documento = models.IntegerField()
+    fecha_alta = models.DateField()
+    activo = BooleanField(default=True)
+
+    def __str__(self):
+        return f"{self.pk} - {self.nombre}"
