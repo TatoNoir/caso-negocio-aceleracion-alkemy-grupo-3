@@ -46,6 +46,7 @@ class ClienteCreateView(CreateView):
         context = super().get_context_data(**kwargs)
         context["pre_titulo"] = "Clientes"
         context["titulo"] = "Crear nuevo cliente"
+        context["activo_clientes"] = "active"
         return context
 
 
@@ -105,25 +106,48 @@ class ClienteRestoreView(View):
 class ServiciosActivosListView(ListView):
     model = Servicio
     context_object_name = "servicios"
-    template_name = "servicio_list_activos.html"
+    template_name = "nuevos/servicio_listado.html"
 
     def get_queryset(self):
         return Servicio.objects.filter(activo=True)
 
+    def get_context_data(self, *, object_list = ..., **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["enlace"] = "crear_servicio"
+        context["descripcion_btn_primario"] = "Crear nuevo servicio"
+        context["pre_titulo"] = "Servicios"
+        context["titulo"] = "Activos"
+        context["activo_servicios"] = "active"
+        return context
+
 
 class ServicioCreateView(CreateView):
     model = Servicio
-    template_name = "servicio_create.html"
+    template_name = "nuevos/servicio_creacion.html"
     form_class = ServicioForm
     success_url = reverse_lazy("listar_servicios")
+
+    def get_context_data(self, *, object_list = ..., **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["pre_titulo"] = "Servicios"
+        context["titulo"] = "Crear nuevo servicio"
+        context["activo_servicios"] = "active"
+        return context
 
 
 class ServicioDetalleUpdateView(UpdateView):
     model = Servicio
     form_class = ServicioForm
-    template_name = "servicio_detalle.html"
+    template_name = "nuevos/servicio_detalle.html"
     context_object_name = "servicio"
     success_url = reverse_lazy("listar_servicios")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["pre_titulo"] = "Servicios"
+        context["titulo"] = "Actualizar servicio"
+        context["activo_servicios"] = "active"
+        return context
 
 
 class ServicioDeleteView(View):
@@ -137,18 +161,27 @@ class ServicioDeleteView(View):
 
 class ServicioInactivosListView(ListView):
     model = Servicio
-    template_name = "servicio_list_inactivos.html"
+    template_name = "nuevos/servicio_listado.html"
     context_object_name = "servicios"
 
     def get_queryset(self):
         return Servicio.objects.filter(activo=False)
+
+    def get_context_data(self, *, object_list = ..., **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["enlace"] = "crear_servicio"
+        context["descripcion_btn_primario"] = "Crear nuevo servicio"
+        context["pre_titulo"] = "Servicios"
+        context["titulo"] = "Inactivos"
+        context["activo_servicios"] = "active"
+        return context
 
 
 def restaurar_servicio(request, pk):
     servicio = get_object_or_404(Servicio, pk=pk)
     servicio.activo = True
     servicio.save()
-    return redirect("listar_servicios")
+    return redirect("listar_servicios_inactivos")
 
 
 class CoordinadoresActivosView(ListView):

@@ -19,9 +19,8 @@
                           </th>
                           <th>Nombre</th>
                           <th>Apellido</th>
-                          <th>Cantidad de reservas realizadas</th>
-                          <th>Fecha de alta</th>
                           <th>Estado</th>
+                          <th>Cantidad de reservas realizadas</th>
                           <th>Total gastado en reservas</th>
                           <th></th>
                         </tr>
@@ -35,9 +34,8 @@
                             <span class="flag flag-xs flag-country-us me-2"></span>
                               {{ cliente.apellido }}
                           </td>
-                          <td>{{ cliente.reservas.count }} Falta realizar</td>
-                          <td>15 Dec 2017</td>
                           <td><span class="badge {{ estado_cliente }} me-1"></span> {{ texto_estado }}</td>
+                          <td>{{ cliente.reservas.count }} Falta realizar</td>
                           <td>{{ cliente.reservas.algo }} Falta realizar</td>
                           <td class="text-end">
                             <span class="dropdown">
