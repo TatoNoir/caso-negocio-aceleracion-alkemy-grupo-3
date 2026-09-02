@@ -10,10 +10,23 @@
 </head>
 
 <body>
-<div class="page">
-  {% include 'nuevos/navbar.html' %}
-  {% block listar %}{% endblock %}
-</div>
+  <div class="page">
+    <div class="page-wrapper">
+
+      {% include 'nuevos/navbar.html' %}
+      <div class="page-body">
+        <div class="container-xl">
+          <div class="row row-deck row-cards">
+            {% block metricas_home %}{% endblock %}
+            {% block cliente_listado %}{% endblock %}
+            {% block cliente_detalle %}{% endblock %}
+            {% block cliente_creacion %}{% endblock%}
+          </div>
+        </div>
+      </div>
+      {% include 'nuevos/footer.html' %}
+    </div>
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.4.0/dist/js/tabler.min.js"></script>
 </body>
 

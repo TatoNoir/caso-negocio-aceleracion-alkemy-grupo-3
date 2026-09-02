@@ -1,0 +1,41 @@
+{% extends 'nuevos/index.html' %}
+{% block cliente_detalle %}
+<div class="col">
+                <div class="row row-cards">
+                  <div class="col-12 col-lg-6">
+                    <div class="card">
+                      <div class="card-header">
+                        <h3 class="card-title">Información del cliente</h3>
+                      </div>
+                      <div class="card-body">
+                        <form method="post" class="space-y">
+                            {% csrf_token %}
+                            <div class="col">
+                                <label class="form-label"> Nombre </label>
+                              {{ form.nombre }}
+                            </div>
+                            <div class="col">
+                                <label class="form-label"> Apellido </label>
+
+                              {{ form.apellido }}
+                            </div>
+                          <div class="text-end">
+                              {% if cliente.activo %}
+                                  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarEliminarModal" data-id="{{ cliente.id }}"
+            data-nombre="{{ cliente.nombre }}" data-url="{% url 'eliminar_cliente' cliente.pk %}">Eliminar</button>
+                                  {% else %}
+                                  <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#confirmarRestaurarModal" data-id="{{ cliente.id }}"
+            data-nombre="{{ cliente.nombre }}" data-url="{% url 'restaurar_cliente' cliente.pk %}">Restaurar</button>
+                                  {% endif %}
+                              <a href="{% if cliente.activo %}{% url 'lista_clientes' %}{% else %}{% url 'clientes_inactivos' %}{% endif %}" class="btn btn-1"> Cancelar </a>
+                              <button type="submit" class="btn btn-primary btn-2"> Guardar cambios </button>
+                            </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+{% include 'nuevos/confirmar_eliminacion.html'%}
+{% include 'nuevos/confirmar_restauracion.html'%}
+{% endblock cliente_detalle %}

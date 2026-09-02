@@ -8,7 +8,7 @@
     <!-- END NAVBAR TOGGLER -->
     <!-- BEGIN NAVBAR LOGO -->
     <div class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-      <a href="." aria-label="Tabler">
+      <a href="{% url 'inicio' %}" aria-label="Tabler">
         Panel Ventas
       </a>
     </div>
@@ -215,8 +215,8 @@
           <div class="col">
             <!-- BEGIN NAVBAR MENU -->
             <ul class="navbar-nav">
-              <li class="nav-item active">
-                <a class="nav-link" href="./">
+              <li class="nav-item {{activo_inicio}}">
+                <a class="nav-link" href="{% url 'inicio' %}">
                   <span
                     class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler.io/icons/icon/home -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -263,7 +263,7 @@
                   <span class="nav-link-title"> Reservas </span>
                 </a>
               </li>
-              <li class="nav-item dropdown">
+              <li class="nav-item dropdown {{ activo_clientes }}">
                 <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown"
                   data-bs-auto-close="outside" role="button" aria-expanded="false">
                   <span
@@ -299,8 +299,8 @@
                   <span class="nav-link-title"> Empleados </span>
                 </a>
                 <div class="dropdown-menu">
-                  <a class="dropdown-item" href="./accordion.html">Activos</a>
-                  <a class="dropdown-item" href="./alerts.html"> Inactivos </a>
+                  <a class="dropdown-item" href="{% url 'lista_empleados' %}">Activos</a>
+                  <a class="dropdown-item" href="{% url 'empleados_inactivos' %}"> Inactivos </a>
                 </div>
               </li>
               <li class="nav-item dropdown">
@@ -328,8 +328,8 @@
                   <span class="nav-link-title"> Coordinadores </span>
                 </a>
                 <div class="dropdown-menu">
-                  <a class="dropdown-item" href="./accordion.html">Activos</a>
-                  <a class="dropdown-item" href="./alerts.html"> Inactivos </a>
+                  <a class="dropdown-item" href="{% url 'lista_coordinadores' %}">Activos</a>
+                  <a class="dropdown-item" href="{% url 'coordinadores_inactivos' %}"> Inactivos </a>
                 </div>
               </li>
               <li class="nav-item dropdown">
@@ -363,3 +363,50 @@
     </div>
   </div>
 </header>
+
+<!-- BEGIN PAGE HEADER -->
+<div class="page-header d-print-none" aria-label="Page header">
+  <div class="container-xl">
+    <div class="row g-2 align-items-center">
+      <div class="col">
+        <!-- Page pre-title -->
+        <div class="page-pretitle">{{ pre_titulo }}</div>
+        <h2 class="page-title">{{ titulo }}</h2>
+      </div>
+      <!-- Page title actions -->
+      <div class="col-auto ms-auto d-print-none">
+        <div class="btn-list">
+          {% if descripcion_btn_secundario %}
+            <span class="d-none d-sm-inline">
+            <a href="{% url 'crear_servicio' %}" class="btn btn-1"> {{descripcion_btn_secundario}} </a>
+          </span>
+          {% endif %}
+          {% if descripcion_btn_primario %}
+          <a href="{% url enlace %}" class="btn btn-primary btn-5 d-none d-sm-inline-block">
+            <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-2">
+              <path d="M12 5l0 14"></path>
+              <path d="M5 12l14 0"></path>
+            </svg>
+            {{ descripcion_btn_primario }}
+          </a>
+          {% endif %}
+          {% if descripcion_btn_primario %}
+          <a href="{% url enlace %}" class="btn btn-primary btn-6 d-sm-none btn-icon">
+            <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-2">
+              <path d="M12 5l0 14"></path>
+              <path d="M5 12l14 0"></path>
+            </svg>
+          </a>
+          {% endif %}
+        </div>
+        <!-- BEGIN MODAL -->
+        <!-- END MODAL -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END PAGE HEADER -->

@@ -1,0 +1,119 @@
+{% extends 'nuevos/index.html' %}
+
+{% block cliente_listado %}
+
+<div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">Listado</h3>
+                  </div>
+                  <div class="table-responsive" style="min-height: 180px;">
+                    <table class="table table-selectable card-table table-vcenter text-nowrap datatable">
+                      <thead>
+                        <tr>
+                          <th class="w-1">
+                            ID
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-sm icon-thick icon-2">
+                              <path d="M6 15l6 -6l6 6"></path>
+                            </svg>
+                          </th>
+                          <th>Nombre</th>
+                          <th>Apellido</th>
+                          <th>Cantidad de reservas realizadas</th>
+                          <th>Fecha de alta</th>
+                          <th>Estado</th>
+                          <th>Total gastado en reservas</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for cliente in clientes %}
+                        <tr>
+                          <td><span class="text-secondary">{{ cliente.pk }}</span></td>
+                          <td><a href="invoice.html" class="text-reset" tabindex="-1">{{ cliente.nombre }}</a></td>
+                          <td>
+                            <span class="flag flag-xs flag-country-us me-2"></span>
+                              {{ cliente.apellido }}
+                          </td>
+                          <td>{{ cliente.reservas.count }} Falta realizar</td>
+                          <td>15 Dec 2017</td>
+                          <td><span class="badge {{ estado_cliente }} me-1"></span> {{ texto_estado }}</td>
+                          <td>{{ cliente.reservas.algo }} Falta realizar</td>
+                          <td class="text-end">
+                            <span class="dropdown">
+                              <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Acciones</button>
+                              <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item" href="{% url 'actualizar_cliente' cliente.pk %}"> Editar </a>
+                                  {% if cliente.activo %}
+                                  <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#confirmarEliminarModal" data-id="{{ cliente.id }}"
+            data-nombre="{{ cliente.nombre }}" data-url="{% url 'eliminar_cliente' cliente.pk %}">Eliminar</button>
+                                  {% else %}
+                                  <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#confirmarRestaurarModal" data-id="{{ cliente.id }}"
+            data-nombre="{{ cliente.nombre }}" data-url="{% url 'restaurar_cliente' cliente.pk %}">Restaurar</button>
+                                  {% endif %}
+                              </div>
+                            </span>
+                          </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td>Sin resultados</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="card-footer">
+                    <div class="row g-2 justify-content-center justify-content-sm-between">
+                      <div class="col-auto d-flex align-items-center">
+                        <p class="m-0 text-secondary">Showing <strong>1 to 8</strong> of <strong>16 entries</strong></p>
+                      </div>
+                      <div class="col-auto">
+                        <ul class="pagination m-0 ms-auto">
+                          <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                              <!-- Download SVG icon from http://tabler.io/icons/icon/chevron-left -->
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-1">
+                                <path d="M15 6l-6 6l6 6"></path>
+                              </svg>
+                            </a>
+                          </li>
+                          <li class="page-item">
+                            <a class="page-link" href="#">1</a>
+                          </li>
+                          <li class="page-item">
+                            <a class="page-link" href="#">2</a>
+                          </li>
+                          <li class="page-item active">
+                            <a class="page-link" href="#">3</a>
+                          </li>
+                          <li class="page-item">
+                            <a class="page-link" href="#">4</a>
+                          </li>
+                          <li class="page-item">
+                            <a class="page-link" href="#">5</a>
+                          </li>
+                          <li class="page-item">
+                            <a class="page-link" href="#">
+                              <!-- Download SVG icon from http://tabler.io/icons/icon/chevron-right -->
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-1">
+                                <path d="M9 6l6 6l-6 6"></path>
+                              </svg>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+{% include 'nuevos/confirmar_eliminacion.html'%}
+{% include 'nuevos/confirmar_restauracion.html'%}
+{% endblock cliente_listado %}

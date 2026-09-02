@@ -16,27 +16,54 @@ def lista_clientes(request):
 
 class ClienteListView(ListView):
     model = Cliente
-    template_name = 'clientes.html'
+    template_name = 'nuevos/cliente_listado.html'
     context_object_name = 'clientes'
 
     def get_queryset(self):
         return Cliente.objects.filter(activo=True)
 
+    def get_context_data(self, *, object_list = ..., **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["enlace"] = "crear_cliente"
+        context["descripcion_btn_primario"] = "Crear nuevo cliente"
+        context["pre_titulo"] = "Clientes"
+        context["titulo"] = "Activos"
+        context["activo_clientes"] = "active"
+        context["estado_cliente"] = "bg-success"
+        context["texto_estado"] = "Activo"
+        return context
+
+
 class ClienteCreateView(CreateView):
     model = Cliente
     form_class = ClienteForm
-    template_name = 'add_cliente.html'
+    template_name = 'nuevos/cliente_creacion.html'
 
     def get_success_url(self):
         return reverse_lazy('lista_clientes')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["pre_titulo"] = "Clientes"
+        context["titulo"] = "Crear nuevo cliente"
+        return context
+
 
 class ClienteUpdateView(UpdateView):
     model = Cliente
-    template_name = 'update_cliente.html'
-    fields = [ 'nombre', 'apellido' ]
+    template_name = 'nuevos/cliente_detalle.html'
+    form_class = ClienteForm
 
     def get_success_url(self):
         return reverse_lazy('lista_clientes')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["pre_titulo"] = "Clientes"
+        context["titulo"] = "Actualizar"
+        context["activo_clientes"] = "active"
+        return context
+
 
 class ClienteDeleteView(View):
 
@@ -49,11 +76,22 @@ class ClienteDeleteView(View):
 
 class ClienteInactivoListView(ListView):
     model = Cliente
-    template_name = 'clientes_inactivos.html'
+    template_name = 'nuevos/cliente_listado.html'
     context_object_name = 'clientes'
 
     def get_queryset(self):
         return Cliente.objects.filter(activo=False)
+
+    def get_context_data(self, *, object_list = ..., **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["enlace"] = "crear_cliente"
+        context["pre_titulo"] = "Clientes"
+        context["titulo"] = "Inactivos"
+        context["descripcion_btn_primario"] = "Crear nuevo cliente"
+        context["estado_cliente"] = "bg-danger"
+        context["texto_estado"] = "Inactivo"
+        context["activo_clientes"] = "active"
+        return context
 
 class ClienteRestoreView(View):
     def post(self, request, pk):
@@ -224,5 +262,14 @@ def metricas_home(request):
             .order_by("-precio").first(),
         "precio_promedio" : Servicio.objects.filter(activo=True).aggregate(
             promedio=Avg("precio"))["promedio"],
+        "empleados_activos": Empleado.objects.filter(activo=True).count(),
+        "coordinadores_activos": Coordinador.objects.filter(activo=True).count(),
+
+        "enlace" : "inicio",
+        "descripcion_btn_primario": "Crear una reserva | Lleva a inicio para no romper",
+        "pre_titulo": "Resumen",
+        "titulo": "Tablero",
+        "descripcion_btn_secundario": "Nuevo servicio",
+        "activo_inicio": "active"
     }
     return render(request, "nuevos/main.html", context)
