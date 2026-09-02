@@ -4,7 +4,7 @@ from .views import (ClienteListView, ClienteCreateView, ClienteUpdateView,
                     ClienteRestoreView, ServiciosActivosListView,
                     ServicioCreateView, ServicioDetalleUpdateView,
                     ServicioDeleteView, ServicioInactivosListView,
-                    restaurar_servicio)
+                    restaurar_servicio, metricas_home)
 
 urlpatterns = [
     path('clientes/', ClienteListView.as_view(), name='lista_clientes'),
@@ -24,5 +24,6 @@ urlpatterns = [
     path("servicios/inactivos", ServicioInactivosListView.as_view(),
          name="listar_servicios_inactivos"),
     path("servicios/<pk>/restaurar/", restaurar_servicio,
-         name="restaurar_servicio")
+         name="restaurar_servicio"),
+    path("", metricas_home, name="inicio"),
 ]

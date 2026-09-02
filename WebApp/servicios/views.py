@@ -1,3 +1,4 @@
+from django.db.models import Avg
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Cliente, Servicio
 from django.views.generic import (ListView, CreateView, UpdateView, View,
@@ -110,3 +111,17 @@ def restaurar_servicio(request, pk):
     servicio.activo = True
     servicio.save()
     return redirect("listar_servicios")
+
+
+def metricas_home(request):
+    context = {
+        "clientes_activos": Cliente.objects.filter(activo=True).count(),
+        "servicios_activos": Servicio.objects.filter(activo=True).count(),
+        "servicio_mas_barato": Servicio.objects.filter(activo=True) \
+            .order_by("precio").first(),
+        "servicio_mas_caro" : Servicio.objects.filter(activo=True) \
+            .order_by("-precio").first(),
+        "precio_promedio" : Servicio.objects.filter(activo=True).aggregate(
+            promedio=Avg("precio"))["promedio"],
+    }
+    return render(request, "nuevos/main.html", context)
