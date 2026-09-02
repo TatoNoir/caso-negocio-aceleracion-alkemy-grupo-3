@@ -1,9 +1,9 @@
 from django.db.models import Avg
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Cliente, Servicio
+from .models import Cliente, Servicio, Coordinador, Empleado
 from django.views.generic import (ListView, CreateView, UpdateView, View,
                                   DeleteView)
-from .forms import ClienteForm, ServicioForm
+from .forms import ClienteForm, ServicioForm, CoordinadorForm, EmpleadoForm
 from django.contrib import messages
 from django.urls import reverse_lazy
 
@@ -111,6 +111,107 @@ def restaurar_servicio(request, pk):
     servicio.activo = True
     servicio.save()
     return redirect("listar_servicios")
+
+
+class CoordinadoresActivosView(ListView):
+    model = Coordinador
+    context_object_name = "coordinadores"
+    template_name = "coordinador/coordinadores_list_activos.html"
+
+    def get_queryset(self):
+        return Coordinador.objects.filter(activo=True)
+
+class CoordinadoresInactivosView(ListView):
+    model = Coordinador
+    context_object_name = "coordinadores"
+    template_name = "coordinador/coordinadores_list_inactivos.html"
+
+    def get_queryset(self):
+        return Coordinador.objects.filter(activo=False)
+
+class CoordinadorCreateView(CreateView):
+    model = Coordinador
+    form_class = CoordinadorForm
+    template_name = 'coordinador/coordinador_create.html'
+
+    def get_success_url(self):
+        return reverse_lazy('lista_coordinadores')
+
+class CoordinadorUpdateView(UpdateView):
+    model = Coordinador
+    template_name = 'coordinador/coordinador_update.html'
+    form_class = CoordinadorForm
+
+    def get_success_url(self):
+        return reverse_lazy('lista_coordinadores')
+
+
+class CoordinadorDeleteView(View):
+    def post(self, request, pk):
+        coordinador = get_object_or_404(Coordinador, pk=pk)
+        coordinador.activo = False
+        coordinador.save()
+
+        return redirect("lista_coordinadores")
+
+
+def restaurar_coordinador(request, pk):
+    coordinador = get_object_or_404(Coordinador, pk=pk)
+    coordinador.activo = True
+    coordinador.save()
+
+    return redirect('coordinadores_inactivos')
+
+
+
+
+class EmpleadosActivosView(ListView):
+    model = Empleado
+    context_object_name = "empleados"
+    template_name = "empleado/empleados_list_activos.html"
+
+    def get_queryset(self):
+        return Empleado.objects.filter(activo=True)
+
+class EmpleadosInactivosView(ListView):
+    model = Empleado
+    context_object_name = "empleados"
+    template_name = "empleado/empleados_list_inactivos.html"
+
+    def get_queryset(self):
+        return Empleado.objects.filter(activo=False)
+
+
+class EmpleadoCreateView(CreateView):
+    model = Empleado
+    form_class = EmpleadoForm
+    template_name = 'empleado/empleado_create.html'
+
+    def get_success_url(self):
+        return reverse_lazy('lista_empleados')
+
+class EmpleadoUpdateView(UpdateView):
+    model = Empleado
+    template_name = 'empleado/empleado_update.html'
+    form_class = EmpleadoForm
+
+    def get_success_url(self):
+        return reverse_lazy('lista_empleados')
+
+class EmpleadoDeleteView(View):
+    def post(self, request, pk):
+        empleado = get_object_or_404(Empleado, pk=pk)
+        empleado.activo = False
+        empleado.save()
+
+        return redirect("lista_empleados")
+
+def restaurar_empleado(request, pk):
+    empleado = get_object_or_404(Empleado, pk=pk)
+    empleado.activo = True
+    empleado.save()
+
+    return redirect('empleados_inactivos')
 
 
 def metricas_home(request):

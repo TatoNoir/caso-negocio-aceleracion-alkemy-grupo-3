@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block empleado_list_inactivos %}
+
+<div>
+
+    <h1>Empleados Inactivos</h1>
+
+    {% if empleados %}
+        <div class="row g-4">
+            <ul class="list-group m-3">
+                {% for empleado in empleados %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span>
+                        {{ empleado.nombre }} {{ empleado.apellido }} {{ empleado.numero_legajo }}
+                    </span>
+
+                    <div class="d-flex gap-2 flex-shrink-0">
+
+                        <form method="post" action="{% url 'restaurar_empleado' empleado.pk %}">
+                            {% csrf_token %}
+
+                            <button type="submit" class="btn btn-success">
+                                Restaurar
+                            </button>
+                        </form>
+
+                    </div>
+
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% else %}
+        <p>
+            No hay empleados inactivos.
+        </p>
+    {% endif %}
+
+    <a href="{% url 'lista_empleados' %}" class="btn btn-secondary ms-2">
+        Cancelar
+    </a>
+</div>
+
+{% endblock empleado_list_inactivos %}
