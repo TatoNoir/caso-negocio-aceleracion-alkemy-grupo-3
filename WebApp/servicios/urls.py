@@ -1,10 +1,12 @@
 from django.urls import path
 from .views import (ClienteListView, ClienteCreateView, ClienteUpdateView,
                     ClienteDeleteView, ClienteInactivoListView,
-                    ClienteRestoreView, ServiciosActivosListView,
+                    ClienteRestoreView, CoordinadorDeleteView, EmpleadoCreateView, EmpleadoDeleteView, EmpleadoUpdateView, EmpleadosActivosView, EmpleadosInactivosView, ServiciosActivosListView,
                     ServicioCreateView, ServicioDetalleUpdateView,
-                    ServicioDeleteView, ServicioInactivosListView,
-                    restaurar_servicio)
+                    ServicioDeleteView, ServicioInactivosListView, restaurar_empleado,
+                    restaurar_servicio, CoordinadoresActivosView, 
+                    CoordinadoresInactivosView, CoordinadorCreateView,
+                    CoordinadorUpdateView, restaurar_coordinador)
 
 urlpatterns = [
     path('clientes/', ClienteListView.as_view(), name='lista_clientes'),
@@ -24,5 +26,19 @@ urlpatterns = [
     path("servicios/inactivos", ServicioInactivosListView.as_view(),
          name="listar_servicios_inactivos"),
     path("servicios/<pk>/restaurar/", restaurar_servicio,
-         name="restaurar_servicio")
+         name="restaurar_servicio"),
+    path('coordinadores/', CoordinadoresActivosView.as_view(), name='lista_coordinadores'),
+    path('coordinadores/nuevo', CoordinadorCreateView.as_view(), name='crear_coordinador'),
+    path('coordinadores/inactivos', CoordinadoresInactivosView.as_view(), name='coordinadores_inactivos'),
+    path('coordinadores/<pk>/update', CoordinadorUpdateView.as_view(), name='actualizar_coordinador'),
+    path('coordinadores/<pk>/restore',restaurar_coordinador, name='restaurar_coordinador'),
+    path('coordinadores/<pk>/delete', CoordinadorDeleteView.as_view(), name='eliminar_coordinador'),
+
+    path('empleados/', EmpleadosActivosView.as_view(), name='lista_empleados'),
+    path('empleados/nuevo', EmpleadoCreateView.as_view(), name='crear_empleado'),
+    path('empleados/inactivos', EmpleadosInactivosView.as_view(), name='empleados_inactivos'),
+    path('empleados/<pk>/update', EmpleadoUpdateView.as_view(), name='actualizar_empleado'),
+    path('empleados/<pk>/restore',restaurar_empleado, name='restaurar_empleado'),
+    path('empleados/<pk>/delete', EmpleadoDeleteView.as_view(), name='eliminar_empleado'),
+
 ]

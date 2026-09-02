@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block coordinadores_list_activos %}
+<div class="d-flex justify-content-between mb-4">
+        <a href="{% url 'crear_coordinador' %}" class="btn btn-primary">
+            Nuevo coordinador
+        </a>
+        <a href="{% url 'coordinadores_inactivos' %}">
+            Ver coordinadores inactivos
+        </a>
+</div>
+{% if coordinadores %}
+        <div class="row g-4">
+            <ul class="list-group m-3">
+                {% for coordinador in coordinadores %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span>
+                        {{ coordinador.nombre }} {{ coordinador.apellido }} {{ coordinador.numero_documento }} {{ coordinador.fecha_alta }}
+                    </span>
+
+                    <div class="d-flex gap-2 flex-shrink-0">
+
+                        <a href="{% url 'actualizar_coordinador' coordinador.pk %}"
+                        class="btn btn-warning">
+                            Editar
+                        </a>
+
+                        <form method="post"
+                            action="{% url 'eliminar_coordinador' coordinador.pk %}">
+                            {% csrf_token %}
+
+                            <button type="submit" class="btn btn-danger">
+                                Eliminar
+                            </button>
+                        </form>
+
+                    </div>
+
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% else %}
+        <p>
+            No hay coordinadores activos.
+        </p>
+    {% endif %}
+{% endblock coordinadores_list_activos %}
