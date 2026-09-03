@@ -18,6 +18,7 @@ class ClienteListView(ListView):
     model = Cliente
     template_name = 'nuevos/cliente_listado.html'
     context_object_name = 'clientes'
+    paginate_by = 8
 
     def get_queryset(self):
         return Cliente.objects.filter(activo=True)
@@ -77,6 +78,7 @@ class ClienteInactivoListView(ListView):
     model = Cliente
     template_name = 'nuevos/cliente_listado.html'
     context_object_name = 'clientes'
+    paginate_by = 8
 
     def get_queryset(self):
         return Cliente.objects.filter(activo=False)
@@ -103,6 +105,7 @@ class ServiciosActivosListView(ListView):
     model = Servicio
     context_object_name = "servicios"
     template_name = "nuevos/servicio_listado.html"
+    paginate_by = 8
 
     def get_queryset(self):
         return Servicio.objects.filter(activo=True)
@@ -159,6 +162,7 @@ class ServicioInactivosListView(ListView):
     model = Servicio
     template_name = "nuevos/servicio_listado.html"
     context_object_name = "servicios"
+    paginate_by = 8
 
     def get_queryset(self):
         return Servicio.objects.filter(activo=False)
@@ -184,6 +188,7 @@ class CoordinadoresActivosView(ListView):
     model = Coordinador
     context_object_name = "coordinadores"
     template_name = "nuevos/coordinador_listado.html"
+    paginate_by = 8
 
     def get_queryset(self):
         return Coordinador.objects.filter(activo=True)
@@ -202,6 +207,7 @@ class CoordinadoresInactivosView(ListView):
     model = Coordinador
     context_object_name = "coordinadores"
     template_name = "nuevos/coordinador_listado.html"
+    paginate_by = 8
 
     def get_queryset(self):
         return Coordinador.objects.filter(activo=False)
@@ -269,6 +275,7 @@ class EmpleadosActivosView(ListView):
     model = Empleado
     context_object_name = "empleados"
     template_name = "nuevos/empleado_listado.html"
+    paginate_by = 8
 
     def get_queryset(self):
         return Empleado.objects.filter(activo=True)
@@ -287,6 +294,7 @@ class EmpleadosInactivosView(ListView):
     model = Empleado
     context_object_name = "empleados"
     template_name = "nuevos/empleado_listado.html"
+    paginate_by = 8
 
     def get_queryset(self):
         return Empleado.objects.filter(activo=False)
