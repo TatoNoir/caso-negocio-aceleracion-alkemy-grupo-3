@@ -19,7 +19,7 @@ class Servicio(models.Model):
     activo = BooleanField(default=True)
 
     def __str__(self):
-        return f"{self.pk} - {self.nombre}"
+        return f"{self.nombre}"
 
 
 class Empleado(models.Model):
@@ -29,7 +29,7 @@ class Empleado(models.Model):
     activo = BooleanField(default=True)
 
     def __str__(self):
-        return f"{self.pk} - {self.nombre}"
+        return f"{self.nombre} {self.apellido}"
 
 
 class Coordinador(models.Model):
@@ -40,7 +40,7 @@ class Coordinador(models.Model):
     activo = BooleanField(default=True)
 
     def __str__(self):
-        return f"{self.pk} - {self.nombre}"
+        return f"{self.nombre} {self.apellido}"
 
 class ReservaServicio(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
@@ -51,5 +51,5 @@ class ReservaServicio(models.Model):
     fecha_servicio = models.DateTimeField()
 
     def __str__(self):
-        return f"Reserva {self.pk} - {self.cliente}"
+        return f"Reserva {self.pk} - {self.cliente} - {self.servicio} - {self.fecha_servicio}"
 
