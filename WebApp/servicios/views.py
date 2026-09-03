@@ -29,8 +29,6 @@ class ClienteListView(ListView):
         context["pre_titulo"] = "Clientes"
         context["titulo"] = "Activos"
         context["activo_clientes"] = "active"
-        context["estado_cliente"] = "bg-success"
-        context["texto_estado"] = "Activo"
         return context
 
 
@@ -89,8 +87,6 @@ class ClienteInactivoListView(ListView):
         context["pre_titulo"] = "Clientes"
         context["titulo"] = "Inactivos"
         context["descripcion_btn_primario"] = "Crear nuevo cliente"
-        context["estado_cliente"] = "bg-danger"
-        context["texto_estado"] = "Inactivo"
         context["activo_clientes"] = "active"
         return context
 

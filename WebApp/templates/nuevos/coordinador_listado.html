@@ -1,107 +1,67 @@
 {% extends 'nuevos/index.html' %}
 {% block coordinador_listado %}
-<div class="col-12">
-                <div class="card">
-                  <div style="min-height: 180px;" class="table-responsive">
-                    <table class="table table-vcenter table-mobile-md card-table">
-                      <thead>
-                        <tr>
-                            <th class="w-1">
-                            ID
-                          </th>
-                          <th>Nombre completo</th>
-                            <th>Fecha de alta</th>
-                          <th>Numero de documento</th>
-                          <th>Estado</th>
-                          <th class="w-1"></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {% for coordinador in coordinadores %}
-                        <tr>
-                          <td data-label="Id"><span class="text-secondary">{{ coordinador.pk }}</span></td>
-                          <td data-label="Nombre completo">
-                            <div class="d-flex py-1 align-items-center">
-                              <span class="avatar avatar-2 me-2"> {{ coordinador.nombre|slice:":1"|upper }}{{ coordinador.apellido|slice:":1"|upper }} </span>
-                                <div class="font-weight-medium">{{ coordinador.nombre }} {{ coordinador.apellido }}</div>
-                            </div>
-                          </td>
-                            <td data-label="Fecha de alta">{{ coordinador.fecha_alta }}</td>
-                          <td data-label="Numero de documento">
-                            <div>{{ coordinador.numero_documento }}</div>
-                          </td>
-                            {% if coordinador.activo %}
-                            <td class="sort-status"><span class="badge bg-success-lt">Activo</span></td>
-                            {% else %}
-                            <td class="sort-status"><span class="badge bg-danger-lt">Inactivo</span></td>
-                            {% endif %}
-                          <td>
-                            <div class="btn-list flex-nowrap">
-                              <a href="{% url 'actualizar_coordinador' coordinador.pk %}" class="btn btn-1"> Editar </a>
-                              <div class="dropdown">
-                                <button class="btn dropdown-toggle align-text-top" data-bs-toggle="dropdown">Actions</button>
-                                <div class="dropdown-menu dropdown-menu-end">
-                                    {% if coordinador.activo %}
-                                    <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#confirmarEliminarModal" data-id="{{ coordinador.pk }}"
-            data-nombre="{{ coordinador.nombre }}" data-url="{% url 'eliminar_coordinador' coordinador.pk %}">Eliminar</button>
-                                    {% else %}
-                                      <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#confirmarRestaurarModal" data-id="{{ coordinador.pk }}"
-            data-nombre="{{ coordinador.nombre }}" data-url="{% url 'restaurar_coordinador' coordinador.pk %}">Restaurar</button>
-                                    {% endif %}
-                                </div>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                        {% empty %}
-                        {% endfor %}
-                      </tbody>
-                    </table>
-                  </div>
-                    <div class="card-footer">
-                    <div class="row g-2 justify-content-center justify-content-sm-between">
-                      <div class="col-auto d-flex align-items-center">
-                        <p class="m-0 text-secondary">Showing <strong>1 to 8</strong> of <strong>16 entries</strong></p>
-                      </div>
-                      <div class="col-auto">
-                        <ul class="pagination m-0 ms-auto">
-                          <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
-                              <!-- Download SVG icon from http://tabler.io/icons/icon/chevron-left -->
-                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-1">
-                                <path d="M15 6l-6 6l6 6"></path>
-                              </svg>
-                            </a>
-                          </li>
-                          <li class="page-item">
-                            <a class="page-link" href="#">1</a>
-                          </li>
-                          <li class="page-item">
-                            <a class="page-link" href="#">2</a>
-                          </li>
-                          <li class="page-item active">
-                            <a class="page-link" href="#">3</a>
-                          </li>
-                          <li class="page-item">
-                            <a class="page-link" href="#">4</a>
-                          </li>
-                          <li class="page-item">
-                            <a class="page-link" href="#">5</a>
-                          </li>
-                          <li class="page-item">
-                            <a class="page-link" href="#">
-                              <!-- Download SVG icon from http://tabler.io/icons/icon/chevron-right -->
-                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-1">
-                                <path d="M9 6l6 6l-6 6"></path>
-                              </svg>
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+{% for coordinador in coordinadores %}
+<div class="col-md-6 col-lg-3">
+  <div class="card">
+    <div class="card-body p-4 text-center">
+      <span class="avatar avatar-xl mb-3"> {{ coordinador.apellido|slice:":1"|upper }}{{ coordinador.nombre|slice:":1"|upper}} </span>
+      <h3 class="m-0 mb-1"><a href="{% url 'actualizar_coordinador' coordinador.pk %}">{{ coordinador.apellido }} {{ coordinador.nombre }}</a></h3>
+      <div class="text-secondary">Coordinador</div>
+      <div class="mt-3">
+        {% if coordinador.activo %}
+        <span class="badge bg-success text-white">Activo</span>
+        {% else %}
+        <span class="badge bg-danger text-white">Inactivo</span>
+        {% endif %}
+      </div>
+    </div>
+    <div class="d-flex">
+      <a href="{% url 'actualizar_coordinador' coordinador.pk %}" class="card-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          class="icon me-2 text-muted icon-3">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
+          <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415" />
+          <path d="M16 5l3 3" />
+        </svg>
+
+        Editar</a>
+      {% if coordinador.activo %}
+      <a href="#" class="card-btn" data-bs-toggle="modal" data-bs-target="#confirmarEliminarModal"
+        data-id="{{ coordinador.id }}" data-nombre="{{ coordinador.nombre }}"
+        data-url="{% url 'eliminar_coordinador' coordinador.pk %}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          class="icon me-2 text-muted icon-3">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M4 7l16 0" />
+          <path d="M10 11l0 6" />
+          <path d="M14 11l0 6" />
+          <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+          <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+        </svg>
+        Eliminar
+      </a>
+      {% else %}
+      <a href="#" class="card-btn" data-bs-toggle="modal" data-bs-target="#confirmarRestaurarModal"
+        data-id="{{ coordinador.id }}" data-nombre="{{ coordinador.nombre }}"
+        data-url="{% url 'restaurar_coordinador' coordinador.pk %}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          class="icon me-2 text-muted icon-3">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M3.06 13a9 9 0 1 0 .49 -4.087" />
+          <path d="M3 4.001v5h5" />
+          <path d="M11 12a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+        </svg>
+        Restaurar
+      </a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endfor %}
 {% include 'nuevos/confirmar_eliminacion.html'%}
 {% include 'nuevos/confirmar_restauracion.html'%}
 {% endblock coordinador_listado%}
