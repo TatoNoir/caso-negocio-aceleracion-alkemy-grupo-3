@@ -187,34 +187,67 @@ def restaurar_servicio(request, pk):
 class CoordinadoresActivosView(ListView):
     model = Coordinador
     context_object_name = "coordinadores"
-    template_name = "coordinador/coordinadores_list_activos.html"
+    template_name = "nuevos/coordinador_listado.html"
 
     def get_queryset(self):
         return Coordinador.objects.filter(activo=True)
 
+    def get_context_data(self, *, object_list = ..., **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["enlace"] = "crear_coordinador"
+        context["descripcion_btn_primario"] = "Crear nuevo coordinador"
+        context["pre_titulo"] = "Coordinadores"
+        context["titulo"] = "Activos"
+        context["activo_coordinadores"] = "active"
+        return context
+
+
 class CoordinadoresInactivosView(ListView):
     model = Coordinador
     context_object_name = "coordinadores"
-    template_name = "coordinador/coordinadores_list_inactivos.html"
+    template_name = "nuevos/coordinador_listado.html"
 
     def get_queryset(self):
         return Coordinador.objects.filter(activo=False)
 
+    def get_context_data(self, *, object_list = ..., **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["enlace"] = "crear_coordinador"
+        context["descripcion_btn_primario"] = "Crear nuevo coordinador"
+        context["pre_titulo"] = "Coordinadores"
+        context["titulo"] = "Inactivos"
+        context["activo_coordinadores"] = "active"
+        return context
+
+
 class CoordinadorCreateView(CreateView):
     model = Coordinador
     form_class = CoordinadorForm
-    template_name = 'coordinador/coordinador_create.html'
+    template_name = 'nuevos/coordinador_creacion.html'
 
     def get_success_url(self):
         return reverse_lazy('lista_coordinadores')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["pre_titulo"] = "Coordinadores"
+        context["titulo"] = "Crear nuevo coordinador"
+        return context
+
+
 class CoordinadorUpdateView(UpdateView):
     model = Coordinador
-    template_name = 'coordinador/coordinador_update.html'
+    template_name = 'nuevos/coordinador_detalle.html'
     form_class = CoordinadorForm
 
     def get_success_url(self):
         return reverse_lazy('lista_coordinadores')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["pre_titulo"] = "Coordinadores"
+        context["titulo"] = "Actualizar"
+        return context
 
 
 class CoordinadorDeleteView(View):

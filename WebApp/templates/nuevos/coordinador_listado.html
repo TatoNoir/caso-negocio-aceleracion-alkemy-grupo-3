@@ -1,0 +1,107 @@
+{% extends 'nuevos/index.html' %}
+{% block coordinador_listado %}
+<div class="col-12">
+                <div class="card">
+                  <div style="min-height: 180px;" class="table-responsive">
+                    <table class="table table-vcenter table-mobile-md card-table">
+                      <thead>
+                        <tr>
+                            <th class="w-1">
+                            ID
+                          </th>
+                          <th>Nombre completo</th>
+                            <th>Fecha de alta</th>
+                          <th>Numero de documento</th>
+                          <th>Estado</th>
+                          <th class="w-1"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for coordinador in coordinadores %}
+                        <tr>
+                          <td data-label="Id"><span class="text-secondary">{{ coordinador.pk }}</span></td>
+                          <td data-label="Nombre completo">
+                            <div class="d-flex py-1 align-items-center">
+                              <span class="avatar avatar-2 me-2"> {{ coordinador.nombre|slice:":1"|upper }}{{ coordinador.apellido|slice:":1"|upper }} </span>
+                                <div class="font-weight-medium">{{ coordinador.nombre }} {{ coordinador.apellido }}</div>
+                            </div>
+                          </td>
+                            <td data-label="Fecha de alta">{{ coordinador.fecha_alta }}</td>
+                          <td data-label="Numero de documento">
+                            <div>{{ coordinador.numero_documento }}</div>
+                          </td>
+                            {% if coordinador.activo %}
+                            <td class="sort-status"><span class="badge bg-success-lt">Activo</span></td>
+                            {% else %}
+                            <td class="sort-status"><span class="badge bg-danger-lt">Inactivo</span></td>
+                            {% endif %}
+                          <td>
+                            <div class="btn-list flex-nowrap">
+                              <a href="{% url 'actualizar_coordinador' coordinador.pk %}" class="btn btn-1"> Editar </a>
+                              <div class="dropdown">
+                                <button class="btn dropdown-toggle align-text-top" data-bs-toggle="dropdown">Actions</button>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    {% if coordinador.activo %}
+                                    <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#confirmarEliminarModal" data-id="{{ coordinador.pk }}"
+            data-nombre="{{ coordinador.nombre }}" data-url="{% url 'eliminar_coordinador' coordinador.pk %}">Eliminar</button>
+                                    {% else %}
+                                      <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#confirmarRestaurarModal" data-id="{{ coordinador.pk }}"
+            data-nombre="{{ coordinador.nombre }}" data-url="{% url 'restaurar_coordinador' coordinador.pk %}">Restaurar</button>
+                                    {% endif %}
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                        {% empty %}
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                    <div class="card-footer">
+                    <div class="row g-2 justify-content-center justify-content-sm-between">
+                      <div class="col-auto d-flex align-items-center">
+                        <p class="m-0 text-secondary">Showing <strong>1 to 8</strong> of <strong>16 entries</strong></p>
+                      </div>
+                      <div class="col-auto">
+                        <ul class="pagination m-0 ms-auto">
+                          <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                              <!-- Download SVG icon from http://tabler.io/icons/icon/chevron-left -->
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-1">
+                                <path d="M15 6l-6 6l6 6"></path>
+                              </svg>
+                            </a>
+                          </li>
+                          <li class="page-item">
+                            <a class="page-link" href="#">1</a>
+                          </li>
+                          <li class="page-item">
+                            <a class="page-link" href="#">2</a>
+                          </li>
+                          <li class="page-item active">
+                            <a class="page-link" href="#">3</a>
+                          </li>
+                          <li class="page-item">
+                            <a class="page-link" href="#">4</a>
+                          </li>
+                          <li class="page-item">
+                            <a class="page-link" href="#">5</a>
+                          </li>
+                          <li class="page-item">
+                            <a class="page-link" href="#">
+                              <!-- Download SVG icon from http://tabler.io/icons/icon/chevron-right -->
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-1">
+                                <path d="M9 6l6 6l-6 6"></path>
+                              </svg>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+{% include 'nuevos/confirmar_eliminacion.html'%}
+{% include 'nuevos/confirmar_restauracion.html'%}
+{% endblock coordinador_listado%}
