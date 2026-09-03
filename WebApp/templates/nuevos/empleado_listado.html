@@ -1,71 +1,62 @@
 {% extends 'nuevos/index.html' %}
-
-{% block cliente_listado %}
-
+{% block empleado_listado%}
 <div class="col-12">
                 <div class="card">
-                  <div class="card-header">
-                    <h3 class="card-title">Listado</h3>
-                  </div>
-                  <div class="table-responsive" style="min-height: 180px;">
-                    <table class="table table-selectable card-table table-vcenter text-nowrap datatable">
+                  <div style="min-height: 180px;" class="table-responsive">
+                    <table class="table table-vcenter table-mobile-md card-table">
                       <thead>
                         <tr>
-                          <th class="w-1">
+                            <th class="w-1">
                             ID
                           </th>
-                          <th>Nombre</th>
-                          <th>Apellido</th>
+                          <th>Nombre completo</th>
+                          <th>Numero de legajo</th>
                           <th>Estado</th>
-                          <th>Cantidad de reservas realizadas</th>
-                          <th>Total gastado en reservas</th>
-                          <th></th>
+                          <th class="w-1"></th>
                         </tr>
                       </thead>
                       <tbody>
-                        {% for cliente in clientes %}
+                        {% for empleado in empleados %}
                         <tr>
-                          <td><span class="text-secondary">{{ cliente.pk }}</span></td>
-                          <td><a href="invoice.html" class="text-reset" tabindex="-1">{{ cliente.nombre }}</a></td>
-                          <td>
-                            <span class="flag flag-xs flag-country-us me-2"></span>
-                              {{ cliente.apellido }}
+                          <td data-label="Id"><span class="text-secondary">{{ empleado.pk }}</span></td>
+                          <td data-label="Nombre completo">
+                            <div class="d-flex py-1 align-items-center">
+                              <span class="avatar avatar-2 me-2"> {{ empleado.nombre|slice:":1"|upper }}{{ empleado.apellido|slice:":1"|upper }} </span>
+                                <div class="font-weight-medium">{{ empleado.nombre }} {{ empleado.apellido }}</div>
+                            </div>
                           </td>
-                          <td><span class="badge {{ estado_cliente }} me-1"></span> {{ texto_estado }}</td>
-                          <td>{{ cliente.reservas.count }} Falta realizar</td>
-                          <td>{{ cliente.reservas.algo }} Falta realizar</td>
-                          <td class="text-end">
-                            <span class="dropdown">
-                              <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Acciones</button>
-                              <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="{% url 'actualizar_cliente' cliente.pk %}"> Editar </a>
-                                  {% if cliente.activo %}
-                                  <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#confirmarEliminarModal" data-id="{{ cliente.id }}"
-            data-nombre="{{ cliente.nombre }}" data-url="{% url 'eliminar_cliente' cliente.pk %}">Eliminar</button>
-                                  {% else %}
-                                  <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#confirmarRestaurarModal" data-id="{{ cliente.id }}"
-            data-nombre="{{ cliente.nombre }}" data-url="{% url 'restaurar_cliente' cliente.pk %}">Restaurar</button>
-                                  {% endif %}
+                          <td data-label="Numero de legajo">
+                            <div>{{ empleado.numero_legajo }}</div>
+                          </td>
+                            {% if empleado.activo %}
+                            <td class="sort-status"><span class="badge bg-success-lt">Activo</span></td>
+                            {% else %}
+                            <td class="sort-status"><span class="badge bg-danger-lt">Inactivo</span></td>
+                            {% endif %}
+                          <td>
+                            <div class="btn-list flex-nowrap">
+                              <a href="{% url 'actualizar_empleado' empleado.pk %}" class="btn btn-1"> Editar </a>
+                              <div class="dropdown">
+                                <button class="btn dropdown-toggle align-text-top" data-bs-toggle="dropdown">Actions</button>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    {% if empleado.activo %}
+                                    <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#confirmarEliminarModal" data-id="{{ empleado.pk }}"
+            data-nombre="{{ empleado.nombre }}" data-url="{% url 'eliminar_empleado' empleado.pk %}">Eliminar</button>
+                                    {% else %}
+                                      <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#confirmarRestaurarModal" data-id="{{ empleado.pk }}"
+            data-nombre="{{ empleado.nombre }}" data-url="{% url 'restaurar_empleado' empleado.pk %}">Restaurar</button>
+                                    {% endif %}
+                                </div>
                               </div>
-                            </span>
+                            </div>
                           </td>
                         </tr>
                         {% empty %}
-                        <tr>
-                            <td>Sin resultados</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
                         {% endfor %}
                       </tbody>
                     </table>
                   </div>
-                  <div class="card-footer">
+                    <div class="card-footer">
                     <div class="row g-2 justify-content-center justify-content-sm-between">
                       <div class="col-auto d-flex align-items-center">
                         <p class="m-0 text-secondary">Showing <strong>1 to 8</strong> of <strong>16 entries</strong></p>
@@ -111,4 +102,4 @@
               </div>
 {% include 'nuevos/confirmar_eliminacion.html'%}
 {% include 'nuevos/confirmar_restauracion.html'%}
-{% endblock cliente_listado %}
+{% endblock empleado_listado%}

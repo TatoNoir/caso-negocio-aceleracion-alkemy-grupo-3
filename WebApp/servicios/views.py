@@ -239,35 +239,70 @@ def restaurar_coordinador(request, pk):
 class EmpleadosActivosView(ListView):
     model = Empleado
     context_object_name = "empleados"
-    template_name = "empleado/empleados_list_activos.html"
+    template_name = "nuevos/empleado_listado.html"
 
     def get_queryset(self):
         return Empleado.objects.filter(activo=True)
 
+    def get_context_data(self, *, object_list = ..., **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["enlace"] = "crear_empleado"
+        context["descripcion_btn_primario"] = "Crear nuevo empleado"
+        context["pre_titulo"] = "Empleados"
+        context["titulo"] = "Activos"
+        context["activo_empleados"] = "active"
+        return context
+
+
 class EmpleadosInactivosView(ListView):
     model = Empleado
     context_object_name = "empleados"
-    template_name = "empleado/empleados_list_inactivos.html"
+    template_name = "nuevos/empleado_listado.html"
 
     def get_queryset(self):
         return Empleado.objects.filter(activo=False)
+
+    def get_context_data(self, *, object_list = ..., **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["enlace"] = "crear_empleado"
+        context["descripcion_btn_primario"] = "Crear nuevo empleado"
+        context["pre_titulo"] = "Empleados"
+        context["titulo"] = "Inactivos"
+        context["activo_empleados"] = "active"
+        return context
 
 
 class EmpleadoCreateView(CreateView):
     model = Empleado
     form_class = EmpleadoForm
-    template_name = 'empleado/empleado_create.html'
+    template_name = 'nuevos/empleado_creacion.html'
 
     def get_success_url(self):
         return reverse_lazy('lista_empleados')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["pre_titulo"] = "Empleados"
+        context["titulo"] = "Crear nuevo empleado"
+        context["activo_empleados"] = "active"
+        return context
+
+
 class EmpleadoUpdateView(UpdateView):
     model = Empleado
-    template_name = 'empleado/empleado_update.html'
+    template_name = 'nuevos/empleado_detalle.html'
     form_class = EmpleadoForm
 
     def get_success_url(self):
         return reverse_lazy('lista_empleados')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["pre_titulo"] = "Empleados"
+        context["titulo"] = "Actualizar"
+        context["activo_empleados"] = "active"
+        return context
+
 
 class EmpleadoDeleteView(View):
     def post(self, request, pk):
