@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import (ClienteListView, ClienteCreateView, ClienteUpdateView,
                     ClienteDeleteView, ClienteInactivoListView,
-                    ClienteRestoreView, CoordinadorDeleteView, EmpleadoCreateView, EmpleadoDeleteView, EmpleadoUpdateView, EmpleadosActivosView, EmpleadosInactivosView, ServiciosActivosListView,
+                    ClienteRestoreView, CoordinadorDeleteView, EmpleadoCreateView, EmpleadoDeleteView, EmpleadoUpdateView, EmpleadosActivosView, EmpleadosInactivosView, ReservaCreateView, ReservaDeleteView, ReservaUpdateView, ReservasView, ServiciosActivosListView,
                     ServicioCreateView, ServicioDetalleUpdateView,
                     ServicioDeleteView, ServicioInactivosListView, restaurar_empleado,
                     restaurar_servicio, CoordinadoresActivosView,
@@ -43,4 +43,9 @@ urlpatterns = [
     path('empleados/<pk>/delete', EmpleadoDeleteView.as_view(), name='eliminar_empleado'),
 
     path("", metricas_home, name="inicio"),
+    path('reservas/', ReservasView.as_view(), name='lista_reservas'),
+    path('reservas/nueva', ReservaCreateView.as_view(), name='crear_reserva'),
+    path('reservas/<pk>/update', ReservaUpdateView.as_view(), name='actualizar_reserva'),
+    path('reservas/<pk>/delete', ReservaDeleteView.as_view(), name='eliminar_reserva'),
+
 ]

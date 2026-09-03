@@ -1,34 +1,29 @@
 {% extends 'base.html' %}
 
-{% block content %}
-
+{% block reserva_list %}
 <div class="d-flex justify-content-between mb-4">
-        <a href="{% url 'clientes_inactivos' %}">
-            Ver clientes inactivos
+        <a href="{% url 'crear_reserva' %}" class="btn btn-primary">
+            Nueva reserva
         </a>
 </div>
-<div>
-
-    <h1>Clientes</h1>
-
-    {% if clientes %}
+{% if reservas %}
         <div class="row g-4">
             <ul class="list-group m-3">
-                {% for cliente in clientes %}
+                {% for reserva in reservas %}
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <span>
-                        {{ cliente.nombre }} {{ cliente.apellido }}
+                        {{ reserva }}
                     </span>
 
                     <div class="d-flex gap-2 flex-shrink-0">
 
-                        <a href="{% url 'actualizar_cliente' cliente.pk %}"
+                        <a href="{% url 'actualizar_reserva' reserva.pk %}"
                         class="btn btn-warning">
                             Editar
                         </a>
 
                         <form method="post"
-                            action="{% url 'eliminar_cliente' cliente.pk %}">
+                            action="{% url 'eliminar_reserva' reserva.pk %}">
                             {% csrf_token %}
 
                             <button type="submit" class="btn btn-danger">
@@ -44,15 +39,7 @@
         </div>
     {% else %}
         <p>
-            No hay clientes activos.
+            No hay reservas.
         </p>
     {% endif %}
-
-    <div class="mb-4">
-        <a href="{% url 'crear_cliente' %}" class="btn btn-primary">
-            Nuevo cliente
-        </a>
-    </div>
-</div>
-
-{% endblock %}
+{% endblock reserva_list %}
