@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Cliente, Servicio, Coordinador, Empleado
+from .models import Cliente, ReservaServicio, Servicio, Coordinador, Empleado
 from django.views.generic import (ListView, CreateView, UpdateView, View,
                                   DeleteView)
-from .forms import ClienteForm, ServicioForm, CoordinadorForm, EmpleadoForm
+from .forms import ClienteForm, ReservaServicioForm, ServicioForm, CoordinadorForm, EmpleadoForm
 from django.contrib import messages
 from django.urls import reverse_lazy
 
@@ -211,3 +211,27 @@ def restaurar_empleado(request, pk):
     empleado.save()
 
     return redirect('empleados_inactivos')
+
+
+class ReservasView(ListView):
+    model = ReservaServicio
+    context_object_name = "reservas"
+    template_name = "reserva/reserva_list.html"
+
+
+class ReservaCreateView(CreateView):
+    model = ReservaServicio
+    form_class = ReservaServicioForm
+    template_name = 'reserva/reserva_create.html'
+    success_url = reverse_lazy('lista_reservas')
+
+class ReservaUpdateView(UpdateView):
+    model = ReservaServicio
+    template_name = 'reserva/reserva_update.html'
+    form_class = ReservaServicioForm
+    success_url = reverse_lazy('lista_reservas')
+
+class ReservaDeleteView(DeleteView):
+    model = ReservaServicio
+    template_name = 'reserva/reserva_delete.html'
+    success_url = reverse_lazy('lista_reservas')
