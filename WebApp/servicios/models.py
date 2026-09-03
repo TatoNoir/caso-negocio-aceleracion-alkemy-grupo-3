@@ -53,3 +53,6 @@ class ReservaServicio(models.Model):
     def __str__(self):
         return f"Reserva {self.pk} - {self.cliente} - {self.servicio} - {self.fecha_servicio}"
 
+    class Meta:
+        verbose_name = "Reserva"
+        verbose_name_plural = "Reservas"

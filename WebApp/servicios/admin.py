@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Coordinador, Empleado, Servicio, Cliente
+from .models import Coordinador, Empleado, Servicio, Cliente, ReservaServicio
 # Register your models here.
 
 @admin.register(Servicio)
@@ -68,3 +68,11 @@ class EmpleadoAdmin(admin.ModelAdmin):
         ''' Este metodo me permite sobreescribir el comportamiento de
          la eliminacion multiple que hay en la interfaz Admin '''
         queryset.update(activo=False)
+
+
+@admin.register(ReservaServicio)
+class ReservaAdmin(admin.ModelAdmin):
+    list_display = ("cliente__nombre", "servicio__nombre", "empleado__nombre",
+                    "coordinador__nombre", "fecha_reserva", "fecha_servicio")
+    list_filter = ("fecha_servicio", "fecha_reserva")
+    ordering = ("-fecha_servicio",)
