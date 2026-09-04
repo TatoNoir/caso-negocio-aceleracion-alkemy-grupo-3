@@ -429,3 +429,13 @@ class ReservaUpdateView(UpdateView):
 class ReservaDeleteView(DeleteView):
     model = ReservaServicio
     success_url = reverse_lazy('lista_reservas')
+
+
+THEMES = ("light", "dark")
+def capturar_tema(request):
+    ''' Permite cambiar el tema del sitio'''
+    theme = request.GET.get("theme", "light")
+
+    if theme not in THEMES:
+        theme = "light"
+    return {"theme": theme}
