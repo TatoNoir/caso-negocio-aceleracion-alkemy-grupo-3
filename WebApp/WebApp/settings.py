@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'servicios',
-    'django_bootstrap5',
     'rest_framework',
     'api',
     'drf_spectacular',
