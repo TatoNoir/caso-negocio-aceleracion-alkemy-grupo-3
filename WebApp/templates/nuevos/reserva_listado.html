@@ -42,7 +42,7 @@
                             {% endif %}
                           <td>{{ reserva.empleado.nombre }} {{ reserva.empleado.apellido }}</td>
                           <td>{{ reserva.coordinador.nombre }} {{reserva.coordinador.apellido }}</td>
-                          <td>${{ reserva.servicio.precio }}</td>
+                          <td>$ {{ reserva.servicio.precio }}</td>
                           <td>{{ reserva.fecha_reserva }}</td>
                           <td class="text-end">
                             <span class="dropdown">

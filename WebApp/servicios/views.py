@@ -1,4 +1,6 @@
-from django.db.models import Avg
+import calendar
+from datetime import datetime, date
+from django.db.models import Avg, Count
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Cliente, ReservaServicio, Servicio, Coordinador, Empleado
 from django.views.generic import (ListView, CreateView, UpdateView, View,
@@ -371,13 +373,19 @@ def metricas_home(request):
         "empleados_activos": Empleado.objects.filter(activo=True).count(),
         "coordinadores_activos": Coordinador.objects.filter(activo=True).count(),
 
-        "enlace" : "inicio",
-        "descripcion_btn_primario": "Crear una reserva | Lleva a inicio para no romper",
+        "enlace" : "crear_reserva",
+        "descripcion_btn_primario": "Crear una reserva",
         "pre_titulo": "Resumen",
         "titulo": "Tablero",
         "descripcion_btn_secundario": "Nuevo servicio",
-        "activo_inicio": "active"
+        "activo_inicio": "active",
+
+        "cliente_mas_recurrente": Cliente.objects.annotate(total_reservas=
+                                                           Count("reservas"))
+        .order_by("-total_reservas").first(),
+
     }
+
     return render(request, "nuevos/main.html", context)
 
 
