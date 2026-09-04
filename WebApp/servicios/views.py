@@ -419,6 +419,16 @@ class ReservaCreateView(CreateView):
         context["activo_reservas"] = "active"
         return context
 
+    def get_initial(self):
+        initial = super().get_initial()
+        servicio_id = self.request.GET.get('servicio')
+
+        if servicio_id:
+            servicio = get_object_or_404(Servicio, pk=servicio_id, activo=True)
+            initial['servicio'] = servicio
+
+        return initial
+
 
 class ReservaUpdateView(UpdateView):
     model = ReservaServicio
