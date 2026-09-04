@@ -1,0 +1,45 @@
+{% extends 'index.html' %}
+{% block reserva_detalle %}
+<div class="col">
+                <div class="row row-cards">
+                  <div class="col-12 col-lg-6">
+                    <div class="card">
+                      <div class="card-header">
+                        <h3 class="card-title">Información de la reserva</h3>
+                      </div>
+                      <div class="card-body">
+                        <form method="post" class="space-y">
+                            {% csrf_token %}
+                            <div class="col">
+                                <label class="form-label"> Cliente solicitante </label>
+                              {{ form.cliente }}
+                            </div>
+                            <div class="col">
+                                <label class="form-label"> Servicio seleccionado </label>
+                              {{ form.servicio }}
+                            </div>
+                            <div class="col">
+                                <label class="form-label"> Empleado que registro la reserva </label>
+                              {{ form.empleado }}
+                            </div>
+                            <div class="col">
+                                <label class="form-label"> Coordinador asignado </label>
+                              {{ form.coordinador }}
+                            </div>
+                            <div class="col">
+                                <label class="form-label"> Fecha de reservacion </label>
+                              {{ form.fecha_servicio }}
+                            </div>
+                          <div class="text-end">
+                              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarEliminarModal" data-id="{{ reserva.pk }}" data-nombre="La reserva No. {{ reserva.pk }}" data-url="{% url 'eliminar_reserva' reserva.pk %}">Eliminar</button>
+                              <a href="{% url 'lista_reservas' %}" class="btn btn-1"> Cancel </a>
+                              <button type="submit" class="btn btn-primary btn-2"> Guardar cambios </button>
+                            </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+{% include 'componentes/confirmar_eliminacion.html' %}
+{% endblock reserva_detalle %}

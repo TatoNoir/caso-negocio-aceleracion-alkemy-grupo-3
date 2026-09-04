@@ -43,7 +43,7 @@ class Coordinador(models.Model):
         return f"{self.nombre} {self.apellido}"
 
 class ReservaServicio(models.Model):
-    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, related_name="reservas")
     servicio = models.ForeignKey(Servicio, on_delete=models.CASCADE)
     empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
     coordinador = models.ForeignKey(Coordinador, on_delete=models.CASCADE)
@@ -56,3 +56,4 @@ class ReservaServicio(models.Model):
     class Meta:
         verbose_name = "Reserva"
         verbose_name_plural = "Reservas"
+        ordering = ["-fecha_servicio"]

@@ -4,9 +4,10 @@ from .views import (ClienteListView, ClienteCreateView, ClienteUpdateView,
                     ClienteRestoreView, CoordinadorDeleteView, EmpleadoCreateView, EmpleadoDeleteView, EmpleadoUpdateView, EmpleadosActivosView, EmpleadosInactivosView, ReservaCreateView, ReservaDeleteView, ReservaUpdateView, ReservasView, ServiciosActivosListView,
                     ServicioCreateView, ServicioDetalleUpdateView,
                     ServicioDeleteView, ServicioInactivosListView, restaurar_empleado,
-                    restaurar_servicio, CoordinadoresActivosView, 
+                    restaurar_servicio, CoordinadoresActivosView,
                     CoordinadoresInactivosView, CoordinadorCreateView,
-                    CoordinadorUpdateView, restaurar_coordinador)
+                    CoordinadorUpdateView, restaurar_coordinador,
+                    metricas_home)
 
 urlpatterns = [
     path('clientes/', ClienteListView.as_view(), name='lista_clientes'),
@@ -41,6 +42,7 @@ urlpatterns = [
     path('empleados/<pk>/restore',restaurar_empleado, name='restaurar_empleado'),
     path('empleados/<pk>/delete', EmpleadoDeleteView.as_view(), name='eliminar_empleado'),
 
+    path("", metricas_home, name="inicio"),
     path('reservas/', ReservasView.as_view(), name='lista_reservas'),
     path('reservas/nueva', ReservaCreateView.as_view(), name='crear_reserva'),
     path('reservas/<pk>/update', ReservaUpdateView.as_view(), name='actualizar_reserva'),

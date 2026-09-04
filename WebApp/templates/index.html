@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en" data-bs-theme="{{ theme }}">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tabler demo</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.4.0/dist/css/tabler.min.css" />
+  <!-- CSS de Plugins de Tabler (Incluye estilos adaptados para FullCalendar) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler-vendors.min.css">
+</head>
+
+<body>
+  <div class="page">
+    <div class="page-wrapper">
+
+      {% include 'componentes/navbar.html' %}
+      <div class="page-body">
+        <div class="container-xl">
+          <div class="row row-deck row-cards">
+            {% block metricas_home %}{% endblock %}
+            {% block cliente_listado %}{% endblock %}
+            {% block cliente_detalle %}{% endblock %}
+            {% block cliente_creacion %}{% endblock %}
+            {% block servicio_listado %}{% endblock %}
+            {% block servicio_detalle %}{% endblock %}
+            {% block servicio_creacion %}{% endblock %}
+            {% block empleado_listado %}{% endblock %}
+            {% block empleado_detalle %}{% endblock %}
+            {% block empleado_creacion %}{% endblock %}
+            {% block coordinador_listado %}{% endblock %}
+            {% block coordinador_detalle %}{% endblock %}
+            {% block coordinador_creacion %}{% endblock %}
+            {% block reserva_listado %}{% endblock %}
+            {% block reserva_creacion %}{% endblock %}
+            {% block reserva_detalle %}{% endblock %}
+          </div>
+        </div>
+      </div>
+      {% include 'componentes/footer.html' %}
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.4.0/dist/js/tabler.min.js"></script>
+  <!-- FullCalendar Base CSS -->
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+  <script>
+const themeDark = document.getElementById("theme-dark");
+const themeLight = document.getElementById("theme-light");
+
+
+// Aplicar el tema guardado
+const savedTheme = localStorage.getItem("theme") || "light";
+
+document.documentElement.setAttribute("data-bs-theme", savedTheme);
+
+
+// Mostrar el botón correspondiente
+updateThemeButtons(savedTheme);
+
+
+// Cambiar a modo oscuro
+themeDark.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    setTheme("dark");
+});
+
+
+// Cambiar a modo claro
+themeLight.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    setTheme("light");
+});
+
+
+// Función para cambiar el tema
+function setTheme(theme) {
+
+    document.documentElement.setAttribute("data-bs-theme", theme);
+
+    localStorage.setItem("theme", theme);
+
+    updateThemeButtons(theme);
+}
+
+
+// Mostrar/ocultar botones según el tema
+function updateThemeButtons(theme) {
+
+    if (theme === "dark") {
+        themeDark.classList.add("d-none");
+        themeLight.classList.remove("d-none");
+    } else {
+        themeDark.classList.remove("d-none");
+        themeLight.classList.add("d-none");
+    }
+}
+  </script>
+</body>
+
+</html>

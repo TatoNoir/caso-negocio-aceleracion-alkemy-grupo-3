@@ -1,0 +1,44 @@
+{% extends 'index.html' %}
+{% block empleado_detalle %}
+<div class="col">
+                <div class="row row-cards">
+                  <div class="col-12 col-lg-7">
+                    <div class="card">
+                      <div class="card-header">
+                        <h3 class="card-title">Información del empleado</h3>
+                      </div>
+                      <div class="card-body">
+                        <form method="post" class="space-y">
+                            {% csrf_token %}
+                            <div class="col">
+                                <label class="form-label"> Nombre </label>
+                              {{ form.nombre }}
+                            </div>
+                            <div class="col">
+                                <label class="form-label"> Apellido </label>
+                              {{ form.apellido }}
+                            </div>
+                            <div class="col">
+                                <label class="form-label"> Numero de legajo </label>
+                              {{ form.numero_legajo }}
+                            </div>
+                          <div class="text-end">
+                              {% if empleado.activo %}
+                                  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarEliminarModal" data-id="{{ empleado.id }}"
+            data-nombre="{{ empleado.nombre }}" data-url="{% url 'eliminar_empleado' empleado.pk %}">Eliminar</button>
+                                  {% else %}
+                                  <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#confirmarRestaurarModal" data-id="{{ empleado.id }}"
+            data-nombre="{{ empleado.nombre }}" data-url="{% url 'restaurar_empleado' empleado.pk %}">Restaurar</button>
+                                  {% endif %}
+                              <a href="{% if empleado.activo %}{% url 'lista_empleados' %}{% else %}{% url 'empleados_inactivos' %}{% endif %}" class="btn btn-1"> Cancelar </a>
+                              <button type="submit" class="btn btn-primary btn-2"> Guardar cambios </button>
+                            </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+{% include 'componentes/confirmar_eliminacion.html'%}
+{% include 'componentes/confirmar_restauracion.html'%}
+{% endblock empleado_detalle %}
