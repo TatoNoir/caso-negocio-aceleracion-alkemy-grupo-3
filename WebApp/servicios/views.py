@@ -6,6 +6,7 @@ from django.views.generic import (ListView, CreateView, UpdateView, View,
 from .forms import ClienteForm, ReservaServicioForm, ServicioForm, CoordinadorForm, EmpleadoForm
 from django.contrib import messages
 from django.urls import reverse_lazy
+from django.utils import timezone
 
 def lista_clientes(request):
     clientes = Cliente.objects.filter(activo=True)
@@ -122,8 +123,8 @@ class ServiciosActivosListView(ListView):
 
 class ServicioCreateView(CreateView):
     model = Servicio
-    template_name = "nuevos/servicio_creacion.html"
     form_class = ServicioForm
+    template_name = "nuevos/servicio_creacion.html"
     success_url = reverse_lazy("listar_servicios")
 
     def get_context_data(self, *, object_list = ..., **kwargs):
@@ -383,24 +384,48 @@ def metricas_home(request):
 class ReservasView(ListView):
     model = ReservaServicio
     context_object_name = "reservas"
-    template_name = "reserva/reserva_list.html"
+    template_name = "nuevos/reserva_listado.html"
+    paginate_by = 8
+
+    def get_context_data(self, *, object_list = ..., **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["enlace"] = "crear_reserva"
+        context["descripcion_btn_primario"] = "Crear nueva reserva"
+        context["pre_titulo"] = "Reservas"
+        context["titulo"] = "Listado"
+        context["activo_reservas"] = "active"
+        context["now"] = timezone.now()
+        return context
 
 
 class ReservaCreateView(CreateView):
     model = ReservaServicio
     form_class = ReservaServicioForm
-    template_name = 'reserva/reserva_create.html'
+    template_name = 'nuevos/reserva_creacion.html'
     success_url = reverse_lazy('lista_reservas')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["pre_titulo"] = "Reservas"
+        context["titulo"] = "Crear nueva reserva"
+        context["activo_reservas"] = "active"
+        return context
 
 
 class ReservaUpdateView(UpdateView):
     model = ReservaServicio
-    template_name = 'reserva/reserva_update.html'
+    template_name = 'nuevos/reserva_detalle.html'
     form_class = ReservaServicioForm
     success_url = reverse_lazy('lista_reservas')
+    context_object_name = "reserva"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["pre_titulo"] = "Reservas"
+        context["titulo"] = "Actualizar"
+        context["activo_reservas"] = "active"
+        return context
 
 class ReservaDeleteView(DeleteView):
     model = ReservaServicio
-    template_name = 'reserva/reserva_delete.html'
     success_url = reverse_lazy('lista_reservas')

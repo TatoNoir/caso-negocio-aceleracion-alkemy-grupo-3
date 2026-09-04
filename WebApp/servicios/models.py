@@ -56,3 +56,4 @@ class ReservaServicio(models.Model):
     class Meta:
         verbose_name = "Reserva"
         verbose_name_plural = "Reservas"
+        ordering = ["-fecha_servicio"]
