@@ -361,6 +361,15 @@ def restaurar_empleado(request, pk):
 
 
 def metricas_home(request):
+
+    ahora = timezone.now()
+
+    reservas_pendientes_mes = ReservaServicio.objects.filter(
+        fecha_servicio__year=ahora.year,
+        fecha_servicio__month=ahora.month,
+        fecha_servicio__gte=ahora
+    )
+
     context = {
         "clientes_activos": Cliente.objects.filter(activo=True).count(),
         "servicios_activos": Servicio.objects.filter(activo=True).count(),
@@ -368,10 +377,9 @@ def metricas_home(request):
             .order_by("precio").first(),
         "servicio_mas_caro" : Servicio.objects.filter(activo=True) \
             .order_by("-precio").first(),
-        "precio_promedio" : Servicio.objects.filter(activo=True).aggregate(
-            promedio=Avg("precio"))["promedio"],
         "empleados_activos": Empleado.objects.filter(activo=True).count(),
         "coordinadores_activos": Coordinador.objects.filter(activo=True).count(),
+        "reservas_pendientes_mes": reservas_pendientes_mes.count(),
 
         "enlace" : "crear_reserva",
         "descripcion_btn_primario": "Crear una reserva",
