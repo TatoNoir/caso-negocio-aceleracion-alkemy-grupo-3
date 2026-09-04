@@ -19,7 +19,7 @@ def lista_clientes(request):
 
 class ClienteListView(ListView):
     model = Cliente
-    template_name = 'nuevos/cliente_listado.html'
+    template_name = 'cliente/cliente_listado.html'
     context_object_name = 'clientes'
     paginate_by = 8
 
@@ -39,7 +39,7 @@ class ClienteListView(ListView):
 class ClienteCreateView(CreateView):
     model = Cliente
     form_class = ClienteForm
-    template_name = 'nuevos/cliente_creacion.html'
+    template_name = 'cliente/cliente_creacion.html'
 
     def get_success_url(self):
         return reverse_lazy('lista_clientes')
@@ -54,7 +54,7 @@ class ClienteCreateView(CreateView):
 
 class ClienteUpdateView(UpdateView):
     model = Cliente
-    template_name = 'nuevos/cliente_detalle.html'
+    template_name = 'cliente/cliente_detalle.html'
     form_class = ClienteForm
 
     def get_success_url(self):
@@ -79,7 +79,7 @@ class ClienteDeleteView(View):
 
 class ClienteInactivoListView(ListView):
     model = Cliente
-    template_name = 'nuevos/cliente_listado.html'
+    template_name = 'cliente/cliente_listado.html'
     context_object_name = 'clientes'
     paginate_by = 8
 
@@ -107,7 +107,7 @@ class ClienteRestoreView(View):
 class ServiciosActivosListView(ListView):
     model = Servicio
     context_object_name = "servicios"
-    template_name = "nuevos/servicio_listado.html"
+    template_name = "servicio/servicio_listado.html"
     paginate_by = 8
 
     def get_queryset(self):
@@ -126,7 +126,7 @@ class ServiciosActivosListView(ListView):
 class ServicioCreateView(CreateView):
     model = Servicio
     form_class = ServicioForm
-    template_name = "nuevos/servicio_creacion.html"
+    template_name = "servicio/servicio_creacion.html"
     success_url = reverse_lazy("listar_servicios")
 
     def get_context_data(self, *, object_list = ..., **kwargs):
@@ -140,7 +140,7 @@ class ServicioCreateView(CreateView):
 class ServicioDetalleUpdateView(UpdateView):
     model = Servicio
     form_class = ServicioForm
-    template_name = "nuevos/servicio_detalle.html"
+    template_name = "servicio/servicio_detalle.html"
     context_object_name = "servicio"
     success_url = reverse_lazy("listar_servicios")
 
@@ -163,7 +163,7 @@ class ServicioDeleteView(View):
 
 class ServicioInactivosListView(ListView):
     model = Servicio
-    template_name = "nuevos/servicio_listado.html"
+    template_name = "servicio/servicio_listado.html"
     context_object_name = "servicios"
     paginate_by = 8
 
@@ -190,7 +190,7 @@ def restaurar_servicio(request, pk):
 class CoordinadoresActivosView(ListView):
     model = Coordinador
     context_object_name = "coordinadores"
-    template_name = "nuevos/coordinador_listado.html"
+    template_name = "coordinador/coordinador_listado.html"
     paginate_by = 8
 
     def get_queryset(self):
@@ -209,7 +209,7 @@ class CoordinadoresActivosView(ListView):
 class CoordinadoresInactivosView(ListView):
     model = Coordinador
     context_object_name = "coordinadores"
-    template_name = "nuevos/coordinador_listado.html"
+    template_name = "coordinador/coordinador_listado.html"
     paginate_by = 8
 
     def get_queryset(self):
@@ -228,7 +228,7 @@ class CoordinadoresInactivosView(ListView):
 class CoordinadorCreateView(CreateView):
     model = Coordinador
     form_class = CoordinadorForm
-    template_name = 'nuevos/coordinador_creacion.html'
+    template_name = 'coordinador/coordinador_creacion.html'
 
     def get_success_url(self):
         return reverse_lazy('lista_coordinadores')
@@ -242,7 +242,7 @@ class CoordinadorCreateView(CreateView):
 
 class CoordinadorUpdateView(UpdateView):
     model = Coordinador
-    template_name = 'nuevos/coordinador_detalle.html'
+    template_name = 'coordinador/coordinador_detalle.html'
     form_class = CoordinadorForm
 
     def get_success_url(self):
@@ -277,7 +277,7 @@ def restaurar_coordinador(request, pk):
 class EmpleadosActivosView(ListView):
     model = Empleado
     context_object_name = "empleados"
-    template_name = "nuevos/empleado_listado.html"
+    template_name = "empleado/empleado_listado.html"
     paginate_by = 8
 
     def get_queryset(self):
@@ -296,7 +296,7 @@ class EmpleadosActivosView(ListView):
 class EmpleadosInactivosView(ListView):
     model = Empleado
     context_object_name = "empleados"
-    template_name = "nuevos/empleado_listado.html"
+    template_name = "empleado/empleado_listado.html"
     paginate_by = 8
 
     def get_queryset(self):
@@ -315,7 +315,7 @@ class EmpleadosInactivosView(ListView):
 class EmpleadoCreateView(CreateView):
     model = Empleado
     form_class = EmpleadoForm
-    template_name = 'nuevos/empleado_creacion.html'
+    template_name = 'empleado/empleado_creacion.html'
 
     def get_success_url(self):
         return reverse_lazy('lista_empleados')
@@ -330,7 +330,7 @@ class EmpleadoCreateView(CreateView):
 
 class EmpleadoUpdateView(UpdateView):
     model = Empleado
-    template_name = 'nuevos/empleado_detalle.html'
+    template_name = 'empleado/empleado_detalle.html'
     form_class = EmpleadoForm
 
     def get_success_url(self):
@@ -386,13 +386,13 @@ def metricas_home(request):
 
     }
 
-    return render(request, "nuevos/main.html", context)
+    return render(request, "main.html", context)
 
 
 class ReservasView(ListView):
     model = ReservaServicio
     context_object_name = "reservas"
-    template_name = "nuevos/reserva_listado.html"
+    template_name = "reserva/reserva_listado.html"
     paginate_by = 8
 
     def get_context_data(self, *, object_list = ..., **kwargs):
@@ -409,7 +409,7 @@ class ReservasView(ListView):
 class ReservaCreateView(CreateView):
     model = ReservaServicio
     form_class = ReservaServicioForm
-    template_name = 'nuevos/reserva_creacion.html'
+    template_name = 'reserva/reserva_creacion.html'
     success_url = reverse_lazy('lista_reservas')
 
     def get_context_data(self, **kwargs):
@@ -422,7 +422,7 @@ class ReservaCreateView(CreateView):
 
 class ReservaUpdateView(UpdateView):
     model = ReservaServicio
-    template_name = 'nuevos/reserva_detalle.html'
+    template_name = 'reserva/reserva_detalle.html'
     form_class = ReservaServicioForm
     success_url = reverse_lazy('lista_reservas')
     context_object_name = "reserva"

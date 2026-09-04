@@ -1,0 +1,175 @@
+{% extends 'index.html' %}
+
+{% block metricas_home %}
+
+<!-- BEGIN PAGE BODY -->
+<div class="col-sm-6 col-lg-3">
+  <div class="card bg-green">
+    <div class="card-body">
+      <div class="subheader text-white">Clientes Activos</div>
+      <div class="d-flex align-items-baseline mb-2">
+        <div class="h1 mb-0 me-2 text-white">{{ clientes_activos }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-sm-6 col-lg-3">
+  <div class="card bg-red text-white">
+    <div class="card-body">
+      <div class="subheader text-white">Empleados Activos</div>
+      <div class="d-flex align-items-baseline mb-2">
+        <div class="h1 mb-0 me-2">{{ empleados_activos }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-sm-6 col-lg-3">
+  <div class="card bg-blue text-white">
+    <div class="card-body">
+      <div class="subheader text-white">Coordinadores Activos</div>
+      <div class="d-flex align-items-baseline mb-2">
+        <div class="h1 mb-0 me-2">{{ coordinadores_activos }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-sm-6 col-lg-3">
+  <div class="card bg-yellow text-white">
+    <div class="card-body">
+      <div class="subheader text-white">Servicios Activos</div>
+      <div class="d-flex align-items-baseline mb-2">
+        <div class="h1 mb-0 me-2">{{ servicios_activos }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-12">
+  <div class="row row-cards">
+    <div class="col-sm-6 col-lg-3">
+      <div class="card card-sm">
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="col-auto">
+              <span
+                class="bg-primary text-white avatar"><!-- Download SVG icon from http://tabler.io/icons/icon/currency-dollar -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="icon icon-1">
+                  <path d="M16.7 8a3 3 0 0 0 -2.7 -2h-4a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6h-4a3 3 0 0 1 -2.7 -2">
+                  </path>
+                  <path d="M12 3v3m0 12v3"></path>
+                </svg></span>
+            </div>
+            <div class="col">
+              <div class="font-weight-medium">Cliente con más reservas</div>
+              <div class="text-secondary">{{ cliente_mas_recurrente.apellido }} {{ cliente_mas_recurrente.nombre }}
+                ({{ cliente_mas_recurrente.reservas.count }})</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+      <div class="card card-sm">
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="col-auto">
+              <span
+                class="bg-green text-white avatar"><!-- Download SVG icon from http://tabler.io/icons/icon/shopping-cart -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="icon icon-1">
+                  <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                  <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                  <path d="M17 17h-11v-14h-2"></path>
+                  <path d="M6 5l14 1l-1 7h-13"></path>
+                </svg></span>
+            </div>
+            <div class="col">
+              <div class="font-weight-medium">Precio promedio por servicio</div>
+              <div class="text-secondary">$ {{ precio_promedio|floatformat:2 }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+      <div class="card card-sm">
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="col-auto">
+              <span class="bg-x text-white avatar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="icon icon-tabler icons-tabler-outline icon-tabler-coins">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M9 14c0 1.657 2.686 3 6 3s6 -1.343 6 -3s-2.686 -3 -6 -3s-6 1.343 -6 3" />
+                  <path d="M9 14v4c0 1.656 2.686 3 6 3s6 -1.344 6 -3v-4" />
+                  <path
+                    d="M3 6c0 1.072 1.144 2.062 3 2.598s4.144 .536 6 0c1.856 -.536 3 -1.526 3 -2.598c0 -1.072 -1.144 -2.062 -3 -2.598s-4.144 -.536 -6 0c-1.856 .536 -3 1.526 -3 2.598" />
+                  <path d="M3 6v10c0 .888 .772 1.45 2 2" />
+                  <path d="M3 11c0 .888 .772 1.45 2 2" />
+                </svg>
+              </span>
+            </div>
+            <div class="col">
+              <div class="font-weight-medium">Precio del servicio mas barato</div>
+              <div class="text-secondary">$ {{ servicio_mas_barato.precio }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+      <div class="card card-sm">
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="col-auto">
+              <span class="bg-facebook text-white avatar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="icon icon-tabler icons-tabler-outline icon-tabler-cash">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M7 15h-3a1 1 0 0 1 -1 -1v-8a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v3" />
+                  <path d="M7 10a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v8a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1l0 -8" />
+                  <path d="M12 14a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                </svg>
+              </span>
+            </div>
+            <div class="col">
+              <div class="font-weight-medium">Precio del servicio más caro</div>
+              <div class="text-secondary">$ {{ servicio_mas_caro.precio }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-12">
+  <div class="card">
+    <div class="card-body">
+      <!-- Contenedor donde FullCalendar renderizará la grilla -->
+      <div id="calendar-reservas"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+  var calendarEl = document.getElementById('calendar-reservas');
+
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth',
+    locale: 'es',
+    // FullCalendar adjuntará ?start=YYYY-MM-DD&end=YYYY-MM-DD a esta URL en cada cambio de mes/semana
+    events: "{% url 'api_reservas_calendar' %}",
+  });
+
+  calendar.render();
+});
+</script>
+{% endblock metricas_home %}
