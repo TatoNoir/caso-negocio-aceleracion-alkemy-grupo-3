@@ -1,16 +1,31 @@
 <div class="col-12">
   <div class="card">
-    <div class="card-body border-bottom py-3">
-      <div class="d-flex">
-        <div class=" text-secondary">
-          Buscar:
-          <div class="ms-2 d-inline-block">
-            <input type="text" class="form-control form-control-sm" aria-label="Buscar reserva"
-              placeholder="nombre del cliente o servicio">
-          </div>
-        </div>
+    {% if mostrar_busqueda %}
+      <div class="card-body border-bottom py-3">
+          <form method="get">
+              <div class="d-flex">
+                  <div class="text-secondary">
+                      Buscar:
+
+                      <div class="ms-2 d-inline-block">
+                          <input
+                              type="text"
+                              name="q"
+                              value="{{ request.GET.q }}"
+                              class="form-control form-control-sm"
+                              aria-label="Buscar reserva"
+                              placeholder="nombre del cliente o servicio"
+                          >
+                      </div>
+                  </div>
+
+                  <button type="submit" class="btn btn-sm btn-primary ms-2">
+                      Buscar
+                  </button>
+              </div>
+          </form>
       </div>
-    </div>
+      {% endif %}
 
     <div id="reservas-container">
       <div class="table-responsive" style="min-height: 200px">
@@ -62,31 +77,9 @@
         </table>
       </div>
 
-      {% if reservas.has_other_pages %}
-      <div class="card-footer">
-          <div class="d-flex justify-content-between align-items-center">
-
-              {% if reservas.has_previous %}
-                  <a href="?page={{ reservas.previous_page_number }}"
-                    class="btn btn-outline-primary pagina-reservas">
-                      Anterior
-                  </a>
-              {% endif %}
-
-              <span>
-                  Página {{ reservas.number }} de {{ reservas.paginator.num_pages }}
-              </span>
-
-              {% if reservas.has_next %}
-                  <a href="?page={{ reservas.next_page_number }}"
-                    class="btn btn-outline-primary pagina-reservas">
-                      Siguiente
-                  </a>
-              {% endif %}
-
-          </div>
-      </div>
-      {% endif %}
+     {% if is_paginated %}
+        {% include 'componentes/paginacion.html' %}
+    {% endif %}
     </div>
   </div>
 </div>
