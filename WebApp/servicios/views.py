@@ -9,6 +9,7 @@ from .forms import ClienteForm, ReservaServicioForm, ServicioForm, CoordinadorFo
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.utils import timezone
+from django.core.paginator import Paginator
 
 def lista_clientes(request):
     clientes = Cliente.objects.filter(activo=True)
@@ -65,7 +66,13 @@ class ClienteUpdateView(UpdateView):
         context["pre_titulo"] = "Clientes"
         context["titulo"] = "Actualizar"
         context["activo_clientes"] = "active"
-        context["reservas"] = self.object.reservas.all()
+        reservas = self.object.reservas.all()
+
+        paginator = Paginator(reservas, 5)
+        context["reservas"] = paginator.get_page(
+            self.request.GET.get("page")
+        )
+
         context["now"] = timezone.now()
         return context
 
@@ -163,7 +170,12 @@ class ServicioDetalleUpdateView(UpdateView):
         context["pre_titulo"] = "Servicios"
         context["titulo"] = "Actualizar servicio"
         context["activo_servicios"] = "active"
-        context["reservas"] = self.object.reservas.all()
+        reservas = self.object.reservas.all()
+        
+        paginator = Paginator(reservas, 5)
+        context["reservas"] = paginator.get_page(
+            self.request.GET.get("page")
+        )
         context["now"] = timezone.now()
         return context
 
@@ -282,7 +294,12 @@ class CoordinadorUpdateView(UpdateView):
         context["pre_titulo"] = "Coordinadores"
         context["titulo"] = "Actualizar"
         context["activo_coordinadores"] = "active"
-        context["reservas"] = self.object.reservas.all()
+        reservas = self.object.reservas.all()
+        
+        paginator = Paginator(reservas, 5)
+        context["reservas"] = paginator.get_page(
+            self.request.GET.get("page")
+        )
         context["now"] = timezone.now()
         return context
 
@@ -386,7 +403,12 @@ class EmpleadoUpdateView(UpdateView):
         context["pre_titulo"] = "Empleados"
         context["titulo"] = "Actualizar"
         context["activo_empleados"] = "active"
-        context["reservas"] = self.object.reservas.all()
+        reservas = self.object.reservas.all()
+        
+        paginator = Paginator(reservas, 5)
+        context["reservas"] = paginator.get_page(
+            self.request.GET.get("page")
+        )
         context["now"] = timezone.now()
         return context
 
@@ -514,4 +536,9 @@ class ReservaUpdateView(UpdateView):
 
 class ReservaDeleteView(DeleteView):
     model = ReservaServicio
-    success_url = reverse_lazy('lista_reservas')
+    
+    def get_success_url(self):
+        return self.request.POST.get(
+            'next',
+            reverse_lazy('lista_reservas')
+        )
