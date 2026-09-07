@@ -44,9 +44,9 @@ class Coordinador(models.Model):
 
 class ReservaServicio(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, related_name="reservas")
-    servicio = models.ForeignKey(Servicio, on_delete=models.CASCADE)
-    empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
-    coordinador = models.ForeignKey(Coordinador, on_delete=models.CASCADE)
+    servicio = models.ForeignKey(Servicio, on_delete=models.CASCADE, related_name="reservas")
+    empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE, related_name="reservas")
+    coordinador = models.ForeignKey(Coordinador, on_delete=models.CASCADE, related_name="reservas")
     fecha_reserva = models.DateTimeField(auto_now_add=True)
     fecha_servicio = models.DateTimeField()
 

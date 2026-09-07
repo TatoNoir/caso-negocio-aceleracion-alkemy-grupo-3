@@ -18,6 +18,7 @@
       <div class="page-body">
         <div class="container-xl">
           <div class="row row-deck row-cards">
+            {% include 'componentes/ultimos_cambios.html' %}
             {% block metricas_home %}{% endblock %}
             {% block cliente_listado %}{% endblock %}
             {% block cliente_detalle %}{% endblock %}

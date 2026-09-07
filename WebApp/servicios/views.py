@@ -65,17 +65,31 @@ class ClienteUpdateView(UpdateView):
         context["pre_titulo"] = "Clientes"
         context["titulo"] = "Actualizar"
         context["activo_clientes"] = "active"
+        context["reservas"] = self.object.reservas.all()
+        context["now"] = timezone.now()
         return context
 
 
-class ClienteDeleteView(View):
+class ClienteDeleteView(DeleteView):
+    model = Cliente
 
-    def post(self, request, pk):
-        cliente = Cliente.objects.get(pk=pk)
-        cliente.activo = False
-        cliente.save()
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
 
-        return redirect('lista_clientes')
+        if self.object.reservas.filter(fecha_servicio__gt=timezone.now()).exists():
+            messages.error(
+                request,
+                "No se puede eliminar este cliente porque está asociado " +
+                "a reservas pendientes. Elimine primero las reservas."
+            )
+            return redirect("actualizar_cliente", pk=self.object.pk)
+
+        self.object.activo = False
+        self.object.save()
+
+        messages.success(request, "Cliente eliminado correctamente.")
+
+        return redirect("lista_clientes")
 
 class ClienteInactivoListView(ListView):
     model = Cliente
@@ -149,14 +163,29 @@ class ServicioDetalleUpdateView(UpdateView):
         context["pre_titulo"] = "Servicios"
         context["titulo"] = "Actualizar servicio"
         context["activo_servicios"] = "active"
+        context["reservas"] = self.object.reservas.all()
+        context["now"] = timezone.now()
         return context
 
 
-class ServicioDeleteView(View):
-    def post(self, request, pk):
-        servicio = get_object_or_404(Servicio, pk=pk)
-        servicio.activo = False
-        servicio.save()
+class ServicioDeleteView(DeleteView):
+    model = Servicio
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+
+        if self.object.reservas.filter(fecha_servicio__gt=timezone.now()).exists():
+            messages.error(
+                request,
+                "No se puede eliminar este servicio porque está asociado " +
+                "a reservas pendientes. Elimine primero las reservas."
+            )
+            return redirect("actualizar_servicio", pk=self.object.pk)
+
+        self.object.activo = False
+        self.object.save()
+
+        messages.success(request, "Servicio eliminado correctamente.")
 
         return redirect("listar_servicios")
 
@@ -252,14 +281,30 @@ class CoordinadorUpdateView(UpdateView):
         context = super().get_context_data(**kwargs)
         context["pre_titulo"] = "Coordinadores"
         context["titulo"] = "Actualizar"
+        context["activo_coordinadores"] = "active"
+        context["reservas"] = self.object.reservas.all()
+        context["now"] = timezone.now()
         return context
 
 
-class CoordinadorDeleteView(View):
-    def post(self, request, pk):
-        coordinador = get_object_or_404(Coordinador, pk=pk)
-        coordinador.activo = False
-        coordinador.save()
+class CoordinadorDeleteView(DeleteView):
+    model = Coordinador
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+
+        if self.object.reservas.filter(fecha_servicio__gt=timezone.now()).exists():
+            messages.error(
+                request,
+                "No se puede eliminar este coodinador porque está asociado " +
+                "a reservas pendientes. Elimine primero las reservas."
+            )
+            return redirect("actualizar_coordinador", pk=self.object.pk)
+
+        self.object.activo = False
+        self.object.save()
+
+        messages.success(request, "Coordinador eliminado correctamente.")
 
         return redirect("lista_coordinadores")
 
@@ -341,14 +386,29 @@ class EmpleadoUpdateView(UpdateView):
         context["pre_titulo"] = "Empleados"
         context["titulo"] = "Actualizar"
         context["activo_empleados"] = "active"
+        context["reservas"] = self.object.reservas.all()
+        context["now"] = timezone.now()
         return context
 
 
-class EmpleadoDeleteView(View):
-    def post(self, request, pk):
-        empleado = get_object_or_404(Empleado, pk=pk)
-        empleado.activo = False
-        empleado.save()
+class EmpleadoDeleteView(DeleteView):
+    model = Empleado
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+
+        if self.object.reservas.filter(fecha_servicio__gt=timezone.now()).exists():
+            messages.error(
+                request,
+                "No se puede eliminar este empleado porque está asociado " +
+                "a reservas pendientes. Elimine primero las reservas."
+            )
+            return redirect("actualizar_empleado", pk=self.object.pk)
+
+        self.object.activo = False
+        self.object.save()
+
+        messages.success(request, "Empleado eliminado correctamente.")
 
         return redirect("lista_empleados")
 
@@ -455,13 +515,3 @@ class ReservaUpdateView(UpdateView):
 class ReservaDeleteView(DeleteView):
     model = ReservaServicio
     success_url = reverse_lazy('lista_reservas')
-
-
-THEMES = ("light", "dark")
-def capturar_tema(request):
-    ''' Permite cambiar el tema del sitio'''
-    theme = request.GET.get("theme", "light")
-
-    if theme not in THEMES:
-        theme = "light"
-    return {"theme": theme}
