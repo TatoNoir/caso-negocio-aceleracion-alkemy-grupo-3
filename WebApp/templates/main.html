@@ -1,0 +1,186 @@
+{% extends 'index.html' %}
+
+{% block metricas_home %}
+
+<!-- BEGIN PAGE BODY -->
+<div class="col-sm-6 col-lg-3">
+  <div class="card bg-green">
+    <div class="card-body">
+      <div class="subheader text-white">Clientes Activos</div>
+      <div class="d-flex align-items-baseline mb-2">
+        <div class="h1 mb-0 me-2 text-white">{{ clientes_activos }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-sm-6 col-lg-3">
+  <div class="card bg-red text-white">
+    <div class="card-body">
+      <div class="subheader text-white">Empleados Activos</div>
+      <div class="d-flex align-items-baseline mb-2">
+        <div class="h1 mb-0 me-2">{{ empleados_activos }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-sm-6 col-lg-3">
+  <div class="card bg-blue text-white">
+    <div class="card-body">
+      <div class="subheader text-white">Coordinadores Activos</div>
+      <div class="d-flex align-items-baseline mb-2">
+        <div class="h1 mb-0 me-2">{{ coordinadores_activos }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-sm-6 col-lg-3">
+  <div class="card bg-yellow text-white">
+    <div class="card-body">
+      <div class="subheader text-white">Servicios Activos</div>
+      <div class="d-flex align-items-baseline mb-2">
+        <div class="h1 mb-0 me-2">{{ servicios_activos }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-12">
+  <div class="row row-cards">
+    <div class="row g-3">
+      <div class="col-sm-6 col-lg-4">
+        <div class="card card-sm h-100">
+          <div class="card-body">
+            <div class="row align-items-start">
+              <div class="col-auto">
+                <span class="bg-green text-white avatar">
+                  <svg xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="icon icon-1">
+                    <path d="M12 3v18"></path>
+                    <path d="M17 5h-7.5a4.5 4.5 0 0 0 0 9h5a4.5 4.5 0 0 1 0 9H6"></path>
+                  </svg>
+                </span>
+              </div>
+
+              <div class="col">
+                <div class="font-weight-medium">
+                  Servicio más barato
+                </div>
+
+                <div class="text-secondary">
+                  {{ servicio_mas_barato.nombre }}
+                </div>
+
+                <div class="fw-bold">
+                  $ {{ servicio_mas_barato.precio|floatformat:2 }}
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4">
+        <div class="card card-sm h-100">
+          <div class="card-body">
+            <div class="row align-items-start">
+              <div class="col-auto">
+                <span class="bg-facebook text-white avatar">
+                  <svg xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="icon icon-1">
+                    <path d="M12 3v18"></path>
+                    <path d="M17 5h-7.5a4.5 4.5 0 0 0 0 9h5a4.5 4.5 0 0 1 0 9H6"></path>
+                  </svg>
+                </span>
+              </div>
+
+              <div class="col">
+                <div class="font-weight-medium">
+                  Servicio más caro
+                </div>
+
+                <div class="text-secondary">
+                  {{ servicio_mas_caro.nombre }}
+                </div>
+
+                <div class="fw-bold">
+                  $ {{ servicio_mas_caro.precio|floatformat:2 }}
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4">
+        <div class="card card-sm h-100">
+          <div class="card-body">
+            <div class="row align-items-start">
+
+              <div class="col-auto">
+                <span class="bg-primary text-white avatar">
+                  <svg xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="icon icon-1">
+                    <path d="M8 7v-3"></path>
+                    <path d="M16 7v-3"></path>
+                    <path d="M4 11h16"></path>
+                    <path d="M5 5h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-14a1 1 0 0 1-1-1v-14a1 1 0 0 1 1-1"></path>
+                  </svg>
+                </span>
+              </div>
+
+              <div class="col">
+                <div class="font-weight-medium">
+                  Reservas pendientes del mes
+                </div>
+
+                <div class="text-secondary">
+                  Próximas reservas
+                </div>
+
+                <div class="fw-bold">
+                  {{ reservas_pendientes_mes }}
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+
+
+  </div>
+</div>
+
+{% include 'componentes/calendario.html' %}
+{% endblock metricas_home %}

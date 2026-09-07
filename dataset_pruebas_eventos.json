@@ -1,0 +1,892 @@
+[
+  {
+    "model": "servicios.cliente",
+    "pk": 1,
+    "fields": {
+      "nombre": "Ana",
+      "apellido": "Gómez",
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.cliente",
+    "pk": 2,
+    "fields": {
+      "nombre": "Martín",
+      "apellido": "Pérez",
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.cliente",
+    "pk": 3,
+    "fields": {
+      "nombre": "Lucía",
+      "apellido": "Fernández",
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.cliente",
+    "pk": 4,
+    "fields": {
+      "nombre": "Sofía",
+      "apellido": "Rodríguez",
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.cliente",
+    "pk": 5,
+    "fields": {
+      "nombre": "Diego",
+      "apellido": "López",
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.cliente",
+    "pk": 6,
+    "fields": {
+      "nombre": "Valentina",
+      "apellido": "Martínez",
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.cliente",
+    "pk": 7,
+    "fields": {
+      "nombre": "Nicolás",
+      "apellido": "Sánchez",
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.cliente",
+    "pk": 8,
+    "fields": {
+      "nombre": "Camila",
+      "apellido": "Díaz",
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.cliente",
+    "pk": 9,
+    "fields": {
+      "nombre": "Julián",
+      "apellido": "Romero",
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.cliente",
+    "pk": 10,
+    "fields": {
+      "nombre": "Carolina",
+      "apellido": "Torres",
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.cliente",
+    "pk": 11,
+    "fields": {
+      "nombre": "Federico",
+      "apellido": "Ruiz",
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.cliente",
+    "pk": 12,
+    "fields": {
+      "nombre": "Paula",
+      "apellido": "Navarro",
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.cliente",
+    "pk": 13,
+    "fields": {
+      "nombre": "Gonzalo",
+      "apellido": "Molina",
+      "activo": false
+    }
+  },
+  {
+    "model": "servicios.cliente",
+    "pk": 14,
+    "fields": {
+      "nombre": "Mariana",
+      "apellido": "Castro",
+      "activo": false
+    }
+  },
+  {
+    "model": "servicios.cliente",
+    "pk": 15,
+    "fields": {
+      "nombre": "Pablo",
+      "apellido": "Acosta",
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.servicio",
+    "pk": 1,
+    "fields": {
+      "nombre": "Salón de eventos",
+      "descripcion": "Salón para cumpleaños, fiestas y celebraciones.",
+      "precio": "250000.00",
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.servicio",
+    "pk": 2,
+    "fields": {
+      "nombre": "Decoración para fiesta de 15 años",
+      "descripcion": "Decoración integral y ambientación para fiestas de 15 años.",
+      "precio": "180000.00",
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.servicio",
+    "pk": 3,
+    "fields": {
+      "nombre": "Decoración para casamiento",
+      "descripcion": "Ambientación y decoración para celebraciones de casamiento.",
+      "precio": "220000.00",
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.servicio",
+    "pk": 4,
+    "fields": {
+      "nombre": "Servicio de lunch",
+      "descripcion": "Servicio de lunch para eventos sociales y corporativos.",
+      "precio": "95000.00",
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.servicio",
+    "pk": 5,
+    "fields": {
+      "nombre": "Servicio de luz y sonido",
+      "descripcion": "Equipamiento de iluminación y sonido para eventos.",
+      "precio": "150000.00",
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.servicio",
+    "pk": 6,
+    "fields": {
+      "nombre": "DJ para eventos",
+      "descripcion": "DJ profesional y musicalización durante el evento.",
+      "precio": "120000.00",
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.servicio",
+    "pk": 7,
+    "fields": {
+      "nombre": "Fotografía para eventos",
+      "descripcion": "Cobertura fotográfica profesional del evento.",
+      "precio": "140000.00",
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.servicio",
+    "pk": 8,
+    "fields": {
+      "nombre": "Video y cobertura del evento",
+      "descripcion": "Filmación y cobertura audiovisual del evento.",
+      "precio": "160000.00",
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.servicio",
+    "pk": 9,
+    "fields": {
+      "nombre": "Ambientación temática",
+      "descripcion": "Ambientación personalizada según la temática elegida.",
+      "precio": "110000.00",
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.servicio",
+    "pk": 10,
+    "fields": {
+      "nombre": "Catering premium",
+      "descripcion": "Servicio gastronómico completo para eventos.",
+      "precio": "280000.00",
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.servicio",
+    "pk": 11,
+    "fields": {
+      "nombre": "Mesa dulce",
+      "descripcion": "Mesa dulce con variedad de postres y decoración.",
+      "precio": "75000.00",
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.servicio",
+    "pk": 12,
+    "fields": {
+      "nombre": "Animación infantil",
+      "descripcion": "Animación y actividades recreativas para fiestas infantiles.",
+      "precio": "85000.00",
+      "activo": false
+    }
+  },
+  {
+    "model": "servicios.empleado",
+    "pk": 1,
+    "fields": {
+      "nombre": "Juan",
+      "apellido": "García",
+      "numero_legajo": 1001,
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.empleado",
+    "pk": 2,
+    "fields": {
+      "nombre": "Laura",
+      "apellido": "Benítez",
+      "numero_legajo": 1002,
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.empleado",
+    "pk": 3,
+    "fields": {
+      "nombre": "Matías",
+      "apellido": "Vega",
+      "numero_legajo": 1003,
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.empleado",
+    "pk": 4,
+    "fields": {
+      "nombre": "Florencia",
+      "apellido": "Herrera",
+      "numero_legajo": 1004,
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.empleado",
+    "pk": 5,
+    "fields": {
+      "nombre": "Agustín",
+      "apellido": "Silva",
+      "numero_legajo": 1005,
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.empleado",
+    "pk": 6,
+    "fields": {
+      "nombre": "Micaela",
+      "apellido": "Ríos",
+      "numero_legajo": 1006,
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.empleado",
+    "pk": 7,
+    "fields": {
+      "nombre": "Tomás",
+      "apellido": "Paz",
+      "numero_legajo": 1007,
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.empleado",
+    "pk": 8,
+    "fields": {
+      "nombre": "Julieta",
+      "apellido": "Suárez",
+      "numero_legajo": 1008,
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.empleado",
+    "pk": 9,
+    "fields": {
+      "nombre": "Ramiro",
+      "apellido": "Ibarra",
+      "numero_legajo": 1009,
+      "activo": false
+    }
+  },
+  {
+    "model": "servicios.empleado",
+    "pk": 10,
+    "fields": {
+      "nombre": "Belén",
+      "apellido": "Morales",
+      "numero_legajo": 1010,
+      "activo": false
+    }
+  },
+  {
+    "model": "servicios.coordinador",
+    "pk": 1,
+    "fields": {
+      "nombre": "Marcos",
+      "apellido": "Alvarez",
+      "numero_documento": 30111222,
+      "fecha_alta": "2026-01-10T10:00:00-03:00",
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.coordinador",
+    "pk": 2,
+    "fields": {
+      "nombre": "Gabriela",
+      "apellido": "Suárez",
+      "numero_documento": 30222333,
+      "fecha_alta": "2026-02-05T10:00:00-03:00",
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.coordinador",
+    "pk": 3,
+    "fields": {
+      "nombre": "Sebastián",
+      "apellido": "Méndez",
+      "numero_documento": 30333444,
+      "fecha_alta": "2026-03-12T10:00:00-03:00",
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.coordinador",
+    "pk": 4,
+    "fields": {
+      "nombre": "Verónica",
+      "apellido": "Paredes",
+      "numero_documento": 30444555,
+      "fecha_alta": "2026-04-20T10:00:00-03:00",
+      "activo": true
+    }
+  },
+  {
+    "model": "servicios.coordinador",
+    "pk": 5,
+    "fields": {
+      "nombre": "Hernán",
+      "apellido": "Quiroga",
+      "numero_documento": 30555666,
+      "fecha_alta": "2026-05-18T10:00:00-03:00",
+      "activo": false
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 1,
+    "fields": {
+      "cliente": 1,
+      "servicio": 1,
+      "empleado": 1,
+      "coordinador": 1,
+      "fecha_reserva": "2026-08-20T16:00:00-03:00",
+      "fecha_servicio": "2026-09-07T14:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 2,
+    "fields": {
+      "cliente": 2,
+      "servicio": 1,
+      "empleado": 2,
+      "coordinador": 2,
+      "fecha_reserva": "2026-08-20T22:00:00-03:00",
+      "fecha_servicio": "2026-09-09T16:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 3,
+    "fields": {
+      "cliente": 3,
+      "servicio": 1,
+      "empleado": 3,
+      "coordinador": 3,
+      "fecha_reserva": "2026-08-21T04:00:00-03:00",
+      "fecha_servicio": "2026-09-11T18:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 4,
+    "fields": {
+      "cliente": 4,
+      "servicio": 1,
+      "empleado": 4,
+      "coordinador": 4,
+      "fecha_reserva": "2026-08-21T10:00:00-03:00",
+      "fecha_servicio": "2026-09-13T20:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 5,
+    "fields": {
+      "cliente": 5,
+      "servicio": 1,
+      "empleado": 5,
+      "coordinador": 1,
+      "fecha_reserva": "2026-08-21T16:00:00-03:00",
+      "fecha_servicio": "2026-09-15T12:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 6,
+    "fields": {
+      "cliente": 6,
+      "servicio": 1,
+      "empleado": 6,
+      "coordinador": 2,
+      "fecha_reserva": "2026-08-21T22:00:00-03:00",
+      "fecha_servicio": "2026-09-17T14:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 7,
+    "fields": {
+      "cliente": 7,
+      "servicio": 1,
+      "empleado": 7,
+      "coordinador": 3,
+      "fecha_reserva": "2026-08-22T04:00:00-03:00",
+      "fecha_servicio": "2026-09-19T16:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 8,
+    "fields": {
+      "cliente": 8,
+      "servicio": 1,
+      "empleado": 8,
+      "coordinador": 4,
+      "fecha_reserva": "2026-08-22T10:00:00-03:00",
+      "fecha_servicio": "2026-09-21T18:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 9,
+    "fields": {
+      "cliente": 9,
+      "servicio": 1,
+      "empleado": 1,
+      "coordinador": 1,
+      "fecha_reserva": "2026-08-22T16:00:00-03:00",
+      "fecha_servicio": "2026-09-23T20:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 10,
+    "fields": {
+      "cliente": 10,
+      "servicio": 1,
+      "empleado": 2,
+      "coordinador": 2,
+      "fecha_reserva": "2026-08-22T22:00:00-03:00",
+      "fecha_servicio": "2026-09-25T12:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 11,
+    "fields": {
+      "cliente": 11,
+      "servicio": 1,
+      "empleado": 3,
+      "coordinador": 3,
+      "fecha_reserva": "2026-08-23T04:00:00-03:00",
+      "fecha_servicio": "2026-09-27T14:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 12,
+    "fields": {
+      "cliente": 12,
+      "servicio": 1,
+      "empleado": 4,
+      "coordinador": 4,
+      "fecha_reserva": "2026-08-23T10:00:00-03:00",
+      "fecha_servicio": "2026-09-29T16:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 13,
+    "fields": {
+      "cliente": 1,
+      "servicio": 3,
+      "empleado": 5,
+      "coordinador": 1,
+      "fecha_reserva": "2026-08-23T16:00:00-03:00",
+      "fecha_servicio": "2026-10-01T18:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 14,
+    "fields": {
+      "cliente": 2,
+      "servicio": 3,
+      "empleado": 6,
+      "coordinador": 2,
+      "fecha_reserva": "2026-08-23T22:00:00-03:00",
+      "fecha_servicio": "2026-10-03T20:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 15,
+    "fields": {
+      "cliente": 3,
+      "servicio": 3,
+      "empleado": 7,
+      "coordinador": 3,
+      "fecha_reserva": "2026-08-24T04:00:00-03:00",
+      "fecha_servicio": "2026-10-05T12:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 16,
+    "fields": {
+      "cliente": 4,
+      "servicio": 3,
+      "empleado": 8,
+      "coordinador": 4,
+      "fecha_reserva": "2026-08-24T10:00:00-03:00",
+      "fecha_servicio": "2026-10-07T14:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 17,
+    "fields": {
+      "cliente": 5,
+      "servicio": 3,
+      "empleado": 1,
+      "coordinador": 1,
+      "fecha_reserva": "2026-08-24T16:00:00-03:00",
+      "fecha_servicio": "2026-10-09T16:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 18,
+    "fields": {
+      "cliente": 6,
+      "servicio": 3,
+      "empleado": 2,
+      "coordinador": 2,
+      "fecha_reserva": "2026-08-24T22:00:00-03:00",
+      "fecha_servicio": "2026-10-11T18:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 19,
+    "fields": {
+      "cliente": 7,
+      "servicio": 3,
+      "empleado": 3,
+      "coordinador": 3,
+      "fecha_reserva": "2026-08-25T04:00:00-03:00",
+      "fecha_servicio": "2026-10-13T20:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 20,
+    "fields": {
+      "cliente": 8,
+      "servicio": 3,
+      "empleado": 4,
+      "coordinador": 4,
+      "fecha_reserva": "2026-08-25T10:00:00-03:00",
+      "fecha_servicio": "2026-10-15T12:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 21,
+    "fields": {
+      "cliente": 9,
+      "servicio": 4,
+      "empleado": 5,
+      "coordinador": 1,
+      "fecha_reserva": "2026-08-25T16:00:00-03:00",
+      "fecha_servicio": "2026-10-17T14:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 22,
+    "fields": {
+      "cliente": 10,
+      "servicio": 4,
+      "empleado": 6,
+      "coordinador": 2,
+      "fecha_reserva": "2026-08-25T22:00:00-03:00",
+      "fecha_servicio": "2026-10-19T16:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 23,
+    "fields": {
+      "cliente": 11,
+      "servicio": 4,
+      "empleado": 7,
+      "coordinador": 3,
+      "fecha_reserva": "2026-08-26T04:00:00-03:00",
+      "fecha_servicio": "2026-09-06T18:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 24,
+    "fields": {
+      "cliente": 12,
+      "servicio": 4,
+      "empleado": 8,
+      "coordinador": 4,
+      "fecha_reserva": "2026-08-26T10:00:00-03:00",
+      "fecha_servicio": "2026-09-08T20:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 25,
+    "fields": {
+      "cliente": 1,
+      "servicio": 4,
+      "empleado": 1,
+      "coordinador": 1,
+      "fecha_reserva": "2026-08-26T16:00:00-03:00",
+      "fecha_servicio": "2026-09-10T12:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 26,
+    "fields": {
+      "cliente": 2,
+      "servicio": 4,
+      "empleado": 2,
+      "coordinador": 2,
+      "fecha_reserva": "2026-08-26T22:00:00-03:00",
+      "fecha_servicio": "2026-09-12T14:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 27,
+    "fields": {
+      "cliente": 3,
+      "servicio": 5,
+      "empleado": 3,
+      "coordinador": 3,
+      "fecha_reserva": "2026-08-27T04:00:00-03:00",
+      "fecha_servicio": "2026-09-14T16:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 28,
+    "fields": {
+      "cliente": 4,
+      "servicio": 5,
+      "empleado": 4,
+      "coordinador": 4,
+      "fecha_reserva": "2026-08-27T10:00:00-03:00",
+      "fecha_servicio": "2026-09-16T18:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 29,
+    "fields": {
+      "cliente": 5,
+      "servicio": 5,
+      "empleado": 5,
+      "coordinador": 1,
+      "fecha_reserva": "2026-08-27T16:00:00-03:00",
+      "fecha_servicio": "2026-09-18T20:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 30,
+    "fields": {
+      "cliente": 6,
+      "servicio": 5,
+      "empleado": 6,
+      "coordinador": 2,
+      "fecha_reserva": "2026-08-27T22:00:00-03:00",
+      "fecha_servicio": "2026-09-20T12:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 31,
+    "fields": {
+      "cliente": 7,
+      "servicio": 5,
+      "empleado": 7,
+      "coordinador": 3,
+      "fecha_reserva": "2026-08-28T04:00:00-03:00",
+      "fecha_servicio": "2026-09-22T14:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 32,
+    "fields": {
+      "cliente": 8,
+      "servicio": 2,
+      "empleado": 8,
+      "coordinador": 4,
+      "fecha_reserva": "2026-08-28T10:00:00-03:00",
+      "fecha_servicio": "2026-09-24T16:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 33,
+    "fields": {
+      "cliente": 9,
+      "servicio": 2,
+      "empleado": 1,
+      "coordinador": 1,
+      "fecha_reserva": "2026-08-28T16:00:00-03:00",
+      "fecha_servicio": "2026-09-26T18:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 34,
+    "fields": {
+      "cliente": 10,
+      "servicio": 2,
+      "empleado": 2,
+      "coordinador": 2,
+      "fecha_reserva": "2026-08-28T22:00:00-03:00",
+      "fecha_servicio": "2026-09-28T20:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 35,
+    "fields": {
+      "cliente": 11,
+      "servicio": 6,
+      "empleado": 3,
+      "coordinador": 3,
+      "fecha_reserva": "2026-08-29T04:00:00-03:00",
+      "fecha_servicio": "2026-09-30T12:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 36,
+    "fields": {
+      "cliente": 12,
+      "servicio": 6,
+      "empleado": 4,
+      "coordinador": 4,
+      "fecha_reserva": "2026-08-29T10:00:00-03:00",
+      "fecha_servicio": "2026-10-02T14:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 37,
+    "fields": {
+      "cliente": 1,
+      "servicio": 7,
+      "empleado": 5,
+      "coordinador": 1,
+      "fecha_reserva": "2026-08-29T16:00:00-03:00",
+      "fecha_servicio": "2026-10-04T16:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 38,
+    "fields": {
+      "cliente": 2,
+      "servicio": 8,
+      "empleado": 6,
+      "coordinador": 2,
+      "fecha_reserva": "2026-08-29T22:00:00-03:00",
+      "fecha_servicio": "2026-10-06T18:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 39,
+    "fields": {
+      "cliente": 3,
+      "servicio": 9,
+      "empleado": 7,
+      "coordinador": 3,
+      "fecha_reserva": "2026-08-30T04:00:00-03:00",
+      "fecha_servicio": "2026-10-08T20:00:00-03:00"
+    }
+  },
+  {
+    "model": "servicios.reservaservicio",
+    "pk": 40,
+    "fields": {
+      "cliente": 4,
+      "servicio": 10,
+      "empleado": 8,
+      "coordinador": 4,
+      "fecha_reserva": "2026-08-30T10:00:00-03:00",
+      "fecha_servicio": "2026-10-10T12:00:00-03:00"
+    }
+  }
+]
