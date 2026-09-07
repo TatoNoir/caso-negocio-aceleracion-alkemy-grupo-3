@@ -16,6 +16,14 @@
     locale: 'es',
     // FullCalendar adjuntará ?start=YYYY-MM-DD&end=YYYY-MM-DD a esta URL en cada cambio de mes/semana
     events: "{% url 'api_reservas_calendar' %}",
+
+    eventClick: function(info) {
+        info.jsEvent.preventDefault();
+
+        const reservaId = info.event.id;
+
+        window.location.href = `/reservas/${reservaId}/update`;
+    },
   });
 
   calendar.render();
