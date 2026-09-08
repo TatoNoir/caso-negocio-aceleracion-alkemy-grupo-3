@@ -98,10 +98,13 @@ class ReservaServicioForm(forms.ModelForm):
             'coordinador': forms.Select(attrs={
                 'class': 'form-control',
             }),
-            'fecha_servicio': forms.DateTimeInput(attrs={
-                'class': 'form-control',
-                'type': 'datetime-local',
-            }),
+            'fecha_servicio': forms.DateTimeInput(
+                format='%Y-%m-%dT%H:%M',
+                attrs={
+                    'class': 'form-control',
+                    'type': 'datetime-local',
+                }
+            ),
         }
 
     def __init__(self, *args, **kwargs):
