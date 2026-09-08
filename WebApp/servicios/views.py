@@ -1,6 +1,6 @@
 import calendar
 from datetime import datetime, date
-from django.db.models import Avg, Count
+from django.db.models import Avg, Count, Q
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Cliente, ReservaServicio, Servicio, Coordinador, Empleado
 from django.views.generic import (ListView, CreateView, UpdateView, View,
@@ -9,6 +9,7 @@ from .forms import ClienteForm, ReservaServicioForm, ServicioForm, CoordinadorFo
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.utils import timezone
+from django.core.paginator import Paginator
 
 def lista_clientes(request):
     clientes = Cliente.objects.filter(activo=True)
@@ -65,7 +66,24 @@ class ClienteUpdateView(UpdateView):
         context["pre_titulo"] = "Clientes"
         context["titulo"] = "Actualizar"
         context["activo_clientes"] = "active"
-        context["reservas"] = self.object.reservas.all()
+        reservas = self.object.reservas.all()
+
+        busqueda = self.request.GET.get("q")
+
+        if busqueda:
+            reservas = reservas.filter(
+                Q(servicio__nombre__icontains=busqueda)
+            )
+
+        paginator = Paginator(reservas, 5)
+        page = paginator.get_page(
+            self.request.GET.get("page")
+        )
+
+        context["reservas"] = page
+        context["page_obj"] = page
+        context["is_paginated"] = paginator.num_pages > 1
+
         context["now"] = timezone.now()
         return context
 
@@ -163,7 +181,26 @@ class ServicioDetalleUpdateView(UpdateView):
         context["pre_titulo"] = "Servicios"
         context["titulo"] = "Actualizar servicio"
         context["activo_servicios"] = "active"
-        context["reservas"] = self.object.reservas.all()
+        context["mostrar_busqueda"] = True
+        reservas = self.object.reservas.all()
+        
+        busqueda = self.request.GET.get("q")
+        
+        if busqueda:
+            reservas = reservas.filter(
+                Q(cliente__nombre__icontains=busqueda) |
+                Q(cliente__apellido__icontains=busqueda)
+            )
+        
+        paginator = Paginator(reservas, 5)
+        page = paginator.get_page(
+            self.request.GET.get("page")
+        )
+        
+        context["reservas"] = page
+        context["page_obj"] = page
+        context["is_paginated"] = paginator.num_pages > 1
+        
         context["now"] = timezone.now()
         return context
 
@@ -282,7 +319,27 @@ class CoordinadorUpdateView(UpdateView):
         context["pre_titulo"] = "Coordinadores"
         context["titulo"] = "Actualizar"
         context["activo_coordinadores"] = "active"
-        context["reservas"] = self.object.reservas.all()
+        context["mostrar_busqueda"] = True
+        reservas = self.object.reservas.all()
+        
+        busqueda = self.request.GET.get("q")
+        
+        if busqueda:
+            reservas = reservas.filter(
+                Q(cliente__nombre__icontains=busqueda) |
+                Q(cliente__apellido__icontains=busqueda) |
+                Q(servicio__nombre__icontains=busqueda)
+            )
+        
+        paginator = Paginator(reservas, 5)
+        page = paginator.get_page(
+                self.request.GET.get("page")
+        )
+        
+        context["reservas"] = page
+        context["page_obj"] = page
+        context["is_paginated"] = paginator.num_pages > 1
+        
         context["now"] = timezone.now()
         return context
 
@@ -386,7 +443,27 @@ class EmpleadoUpdateView(UpdateView):
         context["pre_titulo"] = "Empleados"
         context["titulo"] = "Actualizar"
         context["activo_empleados"] = "active"
-        context["reservas"] = self.object.reservas.all()
+        context["mostrar_busqueda"] = True
+        reservas = self.object.reservas.all()
+
+        busqueda = self.request.GET.get("q")
+
+        if busqueda:
+            reservas = reservas.filter(
+                Q(servicio__nombre__icontains=busqueda) |
+                Q(cliente__nombre__icontains=busqueda) |
+                Q(cliente__apellido__icontains=busqueda)
+            )
+                
+        paginator = Paginator(reservas, 5)
+        page = paginator.get_page(
+                self.request.GET.get("page")
+            )
+                
+        context["reservas"] = page
+        context["page_obj"] = page
+        context["is_paginated"] = paginator.num_pages > 1
+
         context["now"] = timezone.now()
         return context
 
@@ -471,7 +548,22 @@ class ReservasView(ListView):
         context["titulo"] = "Listado"
         context["activo_reservas"] = "active"
         context["now"] = timezone.now()
+        context["mostrar_busqueda"] = True
         return context
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+
+        busqueda = self.request.GET.get("q")
+
+        if busqueda:
+            queryset = queryset.filter(
+                Q(cliente__nombre__icontains=busqueda) |
+                Q(cliente__apellido__icontains=busqueda) |
+                Q(servicio__nombre__icontains=busqueda)
+            )
+
+        return queryset
 
 
 class ReservaCreateView(CreateView):
@@ -514,4 +606,9 @@ class ReservaUpdateView(UpdateView):
 
 class ReservaDeleteView(DeleteView):
     model = ReservaServicio
-    success_url = reverse_lazy('lista_reservas')
+    
+    def get_success_url(self):
+        return self.request.POST.get(
+            'next',
+            reverse_lazy('lista_reservas')
+        )
