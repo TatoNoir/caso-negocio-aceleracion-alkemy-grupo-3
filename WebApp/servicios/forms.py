@@ -1,4 +1,5 @@
 from django import forms
+from django.db.models import Q
 from django.core.exceptions import ValidationError
 from django.utils import timezone
 from .models import Cliente, ReservaServicio, Servicio, Empleado, Coordinador
@@ -98,19 +99,33 @@ class ReservaServicioForm(forms.ModelForm):
             'coordinador': forms.Select(attrs={
                 'class': 'form-control',
             }),
-            'fecha_servicio': forms.DateTimeInput(attrs={
-                'class': 'form-control',
-                'type': 'datetime-local',
-            }),
+            'fecha_servicio': forms.DateTimeInput(
+                format='%Y-%m-%dT%H:%M',
+                attrs={
+                    'class': 'form-control',
+                    'type': 'datetime-local',
+                }
+            ),
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.fields['cliente'].queryset = Cliente.objects.filter(activo=True)
-        self.fields['servicio'].queryset = Servicio.objects.filter(activo=True)
-        self.fields['empleado'].queryset = Empleado.objects.filter(activo=True)
-        self.fields['coordinador'].queryset = Coordinador.objects.filter(activo=True)
+        self.fields['cliente'].queryset = Cliente.objects.filter(
+            Q(activo=True) | Q(pk=self.instance.cliente_id)
+        )
+
+        self.fields['servicio'].queryset = Servicio.objects.filter(
+            Q(activo=True) | Q(pk=self.instance.servicio_id)
+        )
+
+        self.fields['empleado'].queryset = Empleado.objects.filter(
+            Q(activo=True) | Q(pk=self.instance.empleado_id)
+        )
+
+        self.fields['coordinador'].queryset = Coordinador.objects.filter(
+            Q(activo=True) | Q(pk=self.instance.coordinador_id)
+        )
 
     def clean_fecha_servicio(self):
         fecha = self.cleaned_data['fecha_servicio']

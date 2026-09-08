@@ -25,6 +25,7 @@
 
                 <form id="formEliminar" method="post">
                     {% csrf_token %}
+                    <input type="hidden" name="next" id="nextEliminar">
 
                     <button type="submit" class="btn btn-danger">
                         Sí, eliminar
@@ -45,9 +46,12 @@
 
         const nombre = boton.dataset.nombre;
         const url = boton.dataset.url;
+        const next = boton.dataset.next;
 
         document.getElementById('registro-eliminar').textContent = `"${nombre}"`;
 
         document.getElementById('formEliminar').action = url;
+
+        document.getElementById('nextEliminar').value = next;
     });
 </script>
